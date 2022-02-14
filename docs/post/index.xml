@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Example Site</title>
+    <link>https://yuxin-zh.github.io/AllForOne/post/</link>
+    <description>Recent content in Posts on Example Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Feb 2022 00:01:02 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ww</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/ww/</link>
+      <pubDate>Tue, 15 Feb 2022 00:01:02 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/ww/</guid>
+      <description>wdnmd</description>
+    </item>
+    
+  </channel>
+</rss>
