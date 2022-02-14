@@ -1,4 +1,4 @@
-baseurl: https://yuxin-zh.github.io/AllForOne
+baseurl: https://yuxin-zh.github.io/AllForOne 
 publishDir: docs
 languageCode: en-us
 theme: hugo-theme-stack
