@@ -1,3 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://yuxin-zh.github.io/AllForOne'
+publishDir = 'docs'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
