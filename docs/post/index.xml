@@ -6,7 +6,61 @@
     <description>Recent content in Posts on AllForOne&#39;s Site,Your genneration comes!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Feb 2022 00:01:02 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Feb 2022 00:55:19 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/spring/</link>
+      <pubDate>Wed, 16 Feb 2022 00:55:19 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/linux/</link>
+      <pubDate>Wed, 16 Feb 2022 00:54:24 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hbase</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/hbase/</link>
+      <pubDate>Wed, 16 Feb 2022 00:53:15 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/hbase/</guid>
+      <description>1  &amp;lt;a href=https://www.jianshu.com/p/bcc54f63abe4&amp;gt;&amp;lt;/a&amp;gt;   [toc]
+Hbase 1.Overview Hbase  是一种分布式 可拓展 支持海量数据存储的NoSQL数据库 hdfs不支持随机写，基于HDFS，hbase可以实现随时写 hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储  1.1数据模型   NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。
+  Region：表的切片 。刚开始创建就一个region
+  Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，并且查询时只能根据rowkey进行查询
+  Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定
+  TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间
+  Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，cell中的数据是没有类型的，全部是字节码的形式存在。
+  1.2 Hbase基本架构  Store&amp;ndash;&amp;gt;Region&amp;ndash;&amp;gt;Region Server(分布式服务)  RegionServer：DML 对表中数据进行操作  Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete Region：splitRegion，compactRegion 切分和合并     Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行 master管理ddl  Master：DDL 对表进行操作  Table：create,delete,alter 关于表进行操作 RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status   Zookeeper：HBase通过Zookeeper来做master的高可用、RegionServer的监控，元数据的入口以及集群配置的维护等工作    1.</description>
+    </item>
+    
+    <item>
+      <title>Hadoop Learning</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/</link>
+      <pubDate>Wed, 16 Feb 2022 00:42:52 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/</guid>
+      <description>[toc]
+Hadoop相关概念 BIg Data
+1 2 3 4  Volume Velocity（快速） Variety (结构化数据和非结构化数据) Value(低价值密度)：价值密度的大小与数据总量的大小成反比   HIVE：存储 查询和分析存储在hdfs上的大量数据
+缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传 速度很慢
+ZOOkeeper“zn+1哥服务器允许n此错误。
+结构化数据
+1  数据库这种有二维表格的   半结构化数据
+1  类似于一个文件，但是可以导入mysql这种结构化数据中   非结构化数据
+1  无法转化，视频，ppt等   Hadoop
+1 2  分布式系统基础架构：多台服务器共同完成某一任务 主要解决海量数据的存储和分析计算   三大发行版本
+1 2 3  Apache 最基础 Cloudera Horntownworks   Hadoop优势
+1 2 3 4  高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided 高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除 高效性：hadoop是并行工作的 高容错性：能够自动将失败任务重新分配   hadoop组成（important）</description>
+    </item>
+    
     <item>
       <title>Git学习路线</title>
       <link>https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
@@ -19,7 +73,7 @@ When Typed &amp;ldquo;git log&amp;rdquo;</description>
     </item>
     
     <item>
-      <title>Chinese Test</title>
+      <title>Test</title>
       <link>https://yuxin-zh.github.io/AllForOne/p/test-chinese/</link>
       <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
       

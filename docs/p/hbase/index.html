@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='1  &amp;lt;a href=https://www.jianshu.com/p/bcc54f63abe4&amp;gt;&amp;lt;/a&amp;gt;   [toc]
+Hbase 1.Overview Hbase  是一种分布式 可拓展 支持海量数据存储的NoSQL数据库 hdfs不支持随机写，基于HDFS，hbase可以实现随时写 hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储  1.1数据模型   NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。
+  Region：表的切片 。刚开始创建就一个region
+  Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，并且查询时只能根据rowkey进行查询
+  Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定
+  TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间
+  Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，cell中的数据是没有类型的，全部是字节码的形式存在。
+  1.2 Hbase基本架构  Store&amp;ndash;&amp;gt;Region&amp;ndash;&amp;gt;Region Server(分布式服务)  RegionServer：DML 对表中数据进行操作  Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete Region：splitRegion，compactRegion 切分和合并     Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行 master管理ddl  Master：DDL 对表进行操作  Table：create,delete,alter 关于表进行操作 RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status   Zookeeper：HBase通过Zookeeper来做master的高可用、RegionServer的监控，元数据的入口以及集群配置的维护等工作    1.'><title>Hbase</title>
+
+<link rel='canonical' href='https://yuxin-zh.github.io/AllForOne/p/hbase/'>
+
+<link rel="stylesheet" href="/AllForOne/scss/style.min.6e28907171ccdc82609ab6675872e3dc961a1b00f252b4d0a9299bde606269c3.css"><meta property='og:title' content='Hbase'>
+<meta property='og:description' content='1  &amp;lt;a href=https://www.jianshu.com/p/bcc54f63abe4&amp;gt;&amp;lt;/a&amp;gt;   [toc]
+Hbase 1.Overview Hbase  是一种分布式 可拓展 支持海量数据存储的NoSQL数据库 hdfs不支持随机写，基于HDFS，hbase可以实现随时写 hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储  1.1数据模型   NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。
+  Region：表的切片 。刚开始创建就一个region
+  Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，并且查询时只能根据rowkey进行查询
+  Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定
+  TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间
+  Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，cell中的数据是没有类型的，全部是字节码的形式存在。
+  1.2 Hbase基本架构  Store&amp;ndash;&amp;gt;Region&amp;ndash;&amp;gt;Region Server(分布式服务)  RegionServer：DML 对表中数据进行操作  Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete Region：splitRegion，compactRegion 切分和合并     Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行 master管理ddl  Master：DDL 对表进行操作  Table：create,delete,alter 关于表进行操作 RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status   Zookeeper：HBase通过Zookeeper来做master的高可用、RegionServer的监控，元数据的入口以及集群配置的维护等工作    1.'>
+<meta property='og:url' content='https://yuxin-zh.github.io/AllForOne/p/hbase/'>
+<meta property='og:site_name' content='AllForOne&#39;s Site,Your genneration comes!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-02-16T00:53:15&#43;08:00'/><meta property='article:modified_time' content='2022-02-16T00:53:15&#43;08:00'/><meta property='og:image' content='https://yuxin-zh.github.io/AllForOne/p/hbase/b3.jpg' />
+<meta name="twitter:title" content="Hbase">
+<meta name="twitter:description" content="1  &amp;lt;a href=https://www.jianshu.com/p/bcc54f63abe4&amp;gt;&amp;lt;/a&amp;gt;   [toc]
+Hbase 1.Overview Hbase  是一种分布式 可拓展 支持海量数据存储的NoSQL数据库 hdfs不支持随机写，基于HDFS，hbase可以实现随时写 hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储  1.1数据模型   NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。
+  Region：表的切片 。刚开始创建就一个region
+  Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，并且查询时只能根据rowkey进行查询
+  Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定
+  TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间
+  Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，cell中的数据是没有类型的，全部是字节码的形式存在。
+  1.2 Hbase基本架构  Store&amp;ndash;&amp;gt;Region&amp;ndash;&amp;gt;Region Server(分布式服务)  RegionServer：DML 对表中数据进行操作  Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete Region：splitRegion，compactRegion 切分和合并     Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行 master管理ddl  Master：DDL 对表进行操作  Table：create,delete,alter 关于表进行操作 RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status   Zookeeper：HBase通过Zookeeper来做master的高可用、RegionServer的监控，元数据的入口以及集群配置的维护等工作    1."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://yuxin-zh.github.io/AllForOne/p/hbase/b3.jpg' />
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/AllForOne" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/AllForOne/p/hbase/">
+                <img src="/AllForOne/p/hbase/b3_hu5e6f55736be3b54e76a3b17fa38b56ba_71449_800x0_resize_q75_box.jpg"
+                        srcset="/AllForOne/p/hbase/b3_hu5e6f55736be3b54e76a3b17fa38b56ba_71449_800x0_resize_q75_box.jpg 800w, /AllForOne/p/hbase/b3_hu5e6f55736be3b54e76a3b17fa38b56ba_71449_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Hbase" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/AllForOne/p/hbase/">Hbase</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 16, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">https://www.jianshu.com/p/bcc54f63abe4</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>[toc]</p>
+<h1 id="hbase">Hbase</h1>
+<h2 id="1overview-hbase">1.Overview Hbase</h2>
+<ul>
+<li>是一种分布式 可拓展 支持海量数据存储的NoSQL数据库</li>
+<li>hdfs不支持随机写，基于HDFS，hbase可以实现随时写</li>
+<li>hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储</li>
+</ul>
+<h3 id="11数据模型">1.1数据模型</h3>
+<ul>
+<li>
+<p>NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。</p>
+</li>
+<li>
+<p>Region：表的切片 。刚开始创建就一个region</p>
+</li>
+<li>
+<p>Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，<strong>并且查询时只能根据rowkey进行查询</strong></p>
+</li>
+<li>
+<p>Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定</p>
+</li>
+<li>
+<p>TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间</p>
+</li>
+<li>
+<p>Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，<strong>cell中的数据是没有类型的，全部是字节码的形式存在。</strong></p>
+</li>
+</ul>
+<h3 id="12-hbase基本架构">1.2 Hbase基本架构</h3>
+<ul>
+<li>Store&ndash;&gt;Region&ndash;&gt;Region Server(分布式服务)
+<ul>
+<li>RegionServer：DML 对表中数据进行操作
+<ul>
+<li>Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete</li>
+<li>Region：splitRegion，compactRegion     切分和合并</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行  <strong>master管理ddl</strong>
+<ul>
+<li>Master：DDL 对表进行操作
+<ul>
+<li>Table：create,delete,alter  <strong>关于表进行操作</strong></li>
+<li>RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status</li>
+</ul>
+</li>
+<li>Zookeeper：<strong>HBase通过Zookeeper来做master的高可用</strong>、RegionServer的监控，元数据的入口以及集群配置的维护等工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-hbase的安装和配置">1.3 Hbase的安装和配置</h3>
+<h3 id="14-hbase-shell操作">1.4 HBase Shell操作</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#general</span>
+status：
+<span class="c1">#ddl</span>
+alter：
+1）add 列族到表中
+alter <span class="s1">&#39;表名&#39;</span>，NAME<span class="o">=</span>&gt;<span class="s1">&#39;列族名&#39;</span>，VERSIONS<span class="o">=</span>&gt;5
+alter <span class="s1">&#39;t1&#39;</span>, <span class="s1">&#39;f1&#39;</span>, <span class="o">{</span><span class="nv">NAME</span> <span class="o">=</span>&gt; <span class="s1">&#39;f2&#39;</span>, <span class="nv">IN_MEMORY</span> <span class="o">=</span>&gt; true<span class="o">}</span>, <span class="o">{</span><span class="nv">NAME</span> <span class="o">=</span>&gt; <span class="s1">&#39;f3&#39;</span>, <span class="nv">VERSIONS</span> <span class="o">=</span>&gt; 5<span class="o">}</span>
+
+2<span class="o">)</span> delte 列族
+alter <span class="s2">&#34;ns:表名&#34;</span>,NAME<span class="o">=</span>&gt;<span class="s1">&#39;列族名&#39;</span>，METHOD<span class="o">=</span>&gt;<span class="s1">&#39;delete&#39;</span>
+alter <span class="s1">&#39;ns:表名&#39;</span>,<span class="s1">&#39;delete&#39;</span><span class="o">=</span>&gt;<span class="s1">&#39;f1&#39;</span>
+
+3<span class="o">)</span>change table-scope的属性 like below
+alter <span class="s1">&#39;table 
+</span><span class="s1">name&#39;</span>,MAX_FILESIZE<span class="o">=</span>&gt;<span class="s1">&#39;134217728&#39;</span>
+
+4<span class="o">)</span>设置coprocessor   不知道是否仔niit范围内，可以课下学学
+
+5<span class="o">)</span> 通过hbase命令行设置habse的配置信息
+
+6<span class="o">)</span> <span class="nb">set</span> Regin_Replication
+alter <span class="s1">&#39;table_name&#39;</span>,<span class="o">{</span><span class="nv">REGION_REPLICATION</span><span class="o">=</span>&gt;2<span class="o">}</span>
+
+7<span class="o">)</span>disable/enable table split or merge
+alter <span class="s1">&#39;tn&#39;</span>,<span class="o">{</span><span class="nv">SPLIT_ENABLED</span><span class="o">=</span>&gt;false<span class="o">}</span>
+alter <span class="s1">&#39;tn&#39;</span>,<span class="o">{</span><span class="nv">MERGE_ENABLED</span><span class="o">=</span>&gt;false<span class="o">}</span>
+
+alter_status:#Get the status of the alter command. Indicates the number of regions of thetable that have received the updated schema ,Passed by table name.
+
+create:
+create <span class="s1">&#39;ns:tn&#39;</span>,<span class="o">{</span><span class="nv">NAME</span><span class="o">=</span>&gt;<span class="s1">&#39;&#39;</span>,VERSIONS<span class="o">=</span>&gt;<span class="o">}</span>,<span class="o">{}</span>,<span class="o">{}</span>
+desc <span class="s1">&#39;ns;tn&#39;</span>
+
+disable:
+disable <span class="s1">&#39;ns:tn&#39;</span>
+disable_all
+
+drop: should be executed after <span class="s2">&#34;disable&#34;</span>
+drop <span class="s1">&#39;ns:tn&#39;</span>
+drop_all
+
+enable:
+<span class="nb">enable</span> <span class="s1">&#39;ns:tn&#39;</span>
+enable_all
+
+exits:判断表是否存在
+exists <span class="s1">&#39;ns;tb&#39;</span>
+
+get_table: <span class="c1">#Get the given table name and return it as an actual object to be manipulated by the user</span>
+
+
+<span class="c1">#namespacelis</span>
+
+create_namespace <span class="s1">&#39;ns1&#39;</span>
+describe_namespace <span class="s1">&#39;ns1&#39;</span> desc不行
+drop_namespace <span class="s1">&#39;&#39;</span>
+list_namespace
+
+<span class="c1">#DML</span>
+append <span class="s1">&#39;t1&#39;</span>,<span class="s1">&#39;r1&#39;</span>,<span class="s1">&#39;c1&#39;</span>,<span class="s1">&#39;value&#39;</span>相当于String的append value加在原有value的后
+
+count: 计数一个表中的row数量
+count <span class="s1">&#39;tn&#39;</span>
+或者建立一个t-&gt;<span class="s1">&#39;tn&#39;</span>的reference
+t.count也可以
+
+<span class="c1">#####Get &amp;&amp;&amp;&amp; Scan</span>
+
+get的最大范围是指定到rowkey，甚至还可以指定到时间戳
+<span class="c1">#利用scan查看同一个cell之前已经put的数据（scan时可以设置是否开启RAW模式，开启RAW模式会返回已添加删除标记但是未实际进行删除的数据）</span>
+<span class="c1">#get获取某个cell保留的（未添加删除标记）的所有version数据（在describe 表名，查看列族VERSIONS是多少，get就会多少数据(cell的数据大于等于VERSIONS的数量)）</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="15hbase的读写流程">1.5Hbase的读写流程</h3>
+<p><strong>对于hbase来说  读比写要慢</strong></p>
+<ul>
+<li>写流程
+<ul>
+<li>like put的流程：首先client会&mdash;-请求meta表所在的RegionServer&mdash;&gt; ZooKeeper&mdash;-meta:hadoop02&mdash;&ndash;&gt;client   <strong>meta表存的就是元数据</strong>    然后client&mdash;请求meta&mdash;-&gt;hadoop02&mdash;&mdash;返回meta 获取RS&mdash;&ndash;&gt;client&mdash;&ndash;元数据存入缓存&mdash;&ndash;&gt;meta cache(下次查找会先查询缓存，不存在则请求ZK)  找到后client&mdash;发送Put请求&mdash;-&gt;RegionServer&mdash;&gt;wal&mdash;-&gt;memstore&mdash;&ndash;&gt;client</li>
+<li>注意windows时间与linux时间未统一的话，不要传时间戳参数</li>
+</ul>
+</li>
+</ul>
+<h3 id="16hbase特性">1.6Hbase特性</h3>
+<ul>
+<li>容量大</li>
+<li>面向列</li>
+<li>稀疏性：null的空列不占用存储空间</li>
+<li>拓展性：Hbase可以动态增加regionserver</li>
+<li>高性能：LSM数据结构</li>
+</ul>
+<h3 id="17应用场景">1.7应用场景</h3>
+<ul>
+<li>搜索引擎</li>
+<li>增量数据存储</li>
+<li>OPENTSDB</li>
+<li>捕捉用户交互数据</li>
+<li>广告效果和点击流</li>
+<li>内容服务</li>
+<li>信息交换</li>
+</ul>
+<h3 id="18hbase与关系型数据库的区别">1.8Hbase与关系型数据库的区别</h3>
+<ul>
+<li>HBase 里面有以下 2 个主要概念：
+<ul>
+<li>Rowkey: HBase 中的记录是按照 rowkey 来排序的；</li>
+<li>Column family：(列族)是在系统启动之前预先定义好的；</li>
+</ul>
+</li>
+<li>HBase 优缺点：
+<ul>
+<li>不支持条件查询以及 orderby 等查询；</li>
+<li>列可以动态增加，列为空则不存储数据，节省存储空间；</li>
+<li>会自动切分数据；</li>
+<li>可以提供高并发读写操作的支持；</li>
+</ul>
+</li>
+<li>注意事项
+<ul>
+<li>Row key 行键 (Row key)可以是任意字符串(最大长度是 64KB，实际应用中长度一般为 10- 100bytes)，在 hbase 内部，row key 保存为字节数组。</li>
+<li>列族是表的 schema 的一部分(而列不是)，必须在使用表 之前定义。</li>
+<li>HBase 中通过 row 和 columns 确定的为一个存贮单元称为 cell。每个 cell 都保存着同一份数据的 多个版本</li>
+<li>cell 中的数据是没有 类型的，全部是字节码形式存贮。</li>
+<li><strong>HBASE 强依赖 hadoop 的 hdfs 系统，hbase 的版本需要和 hadoop 的版本匹配，否则会出现一些意 外情况</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="19hbase的启动命令">1.9hbase的启动命令</h3>
+<ul>
+<li>启动单机模式：<strong>bin/start-hbase.sh</strong></li>
+<li>查看进程：<strong>jps</strong></li>
+<li>启动集群：start-hbase。sh</li>
+</ul>
+<h2 id="2hbase基础">2.Hbase基础</h2>
+<h3 id="21-hbase表的物理属性">2.1 Hbase表的物理属性</h3>
+<ul>
+<li>Table 在行的方向上分割为多个 Region；</li>
+<li>Region 按大小分割的，每个表开始只有一个 region，随着数据增多，region 不断增 大，当增大到一个阀值的时候，region 就会等分会两个新的 region，之后会有越来 越多的 region；</li>
+<li>Region 是 Hbase 中分布式存储和负载均衡的<strong>最小单元</strong>，<strong>不同 Region 分布到不同 RegionServer 上。</strong></li>
+</ul>
+<h3 id="22region">2.2Region</h3>
+<ul>
+<li>
+<p>Region组成</p>
+<ul>
+<li>Region 由一个或者多个 Store 组成，每个 store 保存一个 columns family；</li>
+<li>每个 Strore 又由一 个 memStore 和 0 至多个 StoreFile 组成，StoreFile 包含 HFile；memStore 存储在内存中， StoreFile 存储在 HDFS 上</li>
+<li>Region 虽然是分布式存储的最小单元，但并不是存储的最小单元，Region 默认大小是 256M，当一个 Region 大小超过设置的值，Hmaster 会将 Region 拆分为 2 个子 Region，同时父 Region 下线。</li>
+</ul>
+</li>
+<li>
+<p>RegionServer(DML)</p>
+<ul>
+<li>Region server 维护 Master 分配给它的 region，处理对这些 region 的 IO 请求 </li>
+<li>Region server 负责切分在运行过程中变得过大的 regio</li>
+</ul>
+</li>
+<li>
+<p>Hmaster</p>
+<ul>
+<li>管理用户对 Table 的增、删、改、查操作 </li>
+<li>管理 RegionServer 的负载均衡、调整 Region 的分布 </li>
+<li>在 Region Split 后，将新 Region 分布到不同的RegionServer。 </li>
+<li>在 RegionServer 宕机后，那该 RegionServer 上所管理的 Region 由 HMaster 进行重新分 配。</li>
+</ul>
+</li>
+<li>
+<p>管理类</p>
+<ul>
+<li>
+<p>HbaseAdmin：提供接口关系 HBase 数据库中的表信息</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">HBaseAdmin</span> <span class="n">admin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HBaseAdmin</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>HTableDescriptor:维护表的信息</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">setMaxFileSize</span><span class="err">，</span><span class="n">指定最大的</span> <span class="n">region</span> <span class="n">size</span>
+<span class="n">setMemStoreFlushSize</span> <span class="n">指定</span> <span class="n">memstore</span> <span class="n">flush</span> <span class="n">到</span> <span class="n">HDFS</span> <span class="n">上的文件大小</span>
+<span class="n">通过</span> <span class="n">addFamily</span> <span class="n">方法增加</span> <span class="n">famil</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>HColumnDescriptor: 代表的是 column 的 schema，</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nl">setTimeToLive:</span><span class="n">指定最大的</span> <span class="n">TTL</span><span class="o">,</span><span class="n">单位是</span> <span class="n">ms</span><span class="o">,</span><span class="n">过期数据会被自动删除</span><span class="err">。</span>
+<span class="err"></span> <span class="n">setInMemory</span><span class="o">:</span><span class="n">指定是否放在内存中</span><span class="err">，</span><span class="n">对小表有用</span><span class="err">，</span><span class="n">可用于提高效率</span><span class="err">。</span><span class="n">默认关闭</span>
+<span class="err"></span> <span class="n">setBloomFilter</span><span class="o">:</span><span class="n">指定是否使用</span> <span class="n">BloomFilter</span><span class="o">,</span><span class="n">可提高随机查询效率</span><span class="err">。</span><span class="n">默认关闭</span>
+<span class="err"></span> <span class="n">setCompressionType</span><span class="o">:</span><span class="n">设定数据压缩类型</span><span class="err">。</span><span class="n">默认无压缩</span><span class="err">。</span>
+<span class="err"></span> <span class="n">setMaxVersions</span><span class="o">:</span><span class="n">指定数据最大保存的版本个数</span><span class="err">。</span><span class="n">默认为</span> <span class="n">3</span><span class="err">。</span>
+
+<span class="n">HTableDescriptor</span> <span class="n">htd</span> <span class="o">=</span><span class="n">newHTableDescriptor</span><span class="o">(</span><span class="n">tablename</span><span class="o">);</span>
+<span class="n">htd</span><span class="o">.</span><span class="na">addFamily</span><span class="o">(</span><span class="k">new</span> <span class="n">HColumnDescriptor</span><span class="o">(</span><span class="err">“</span><span class="n">myFamily</span><span class="err">”</span><span class="o">));</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="3">3.</h2>
+<h3 id="1hbase的存储逻辑">1.HBase的存储逻辑</h3>
+<ul>
+<li>HBase 的表中的数据分隔是使用列族而不是列。每个列族对应一个 HFile 文件，在 HDFS 上以一个 目录的形式存放。</li>
+<li>Key-Value存储模型：
+<ul>
+<li>key是RowKey，Value是列族的集合。&mdash;&gt;也就是说我们可以通过rowkey检索到value</li>
+<li>行键的设计：、
+<ul>
+<li>表扫描是对行键的操作，所以，<strong>行键的设计控制着你能够通过 HBase 执行的实时/直接获取量。</strong></li>
+<li>当在生产环境中运行 HBase 时，它在 HDFS 上部运行，数据基于行键通过 HDFS，如果你所有的 行键都是以 user-开头，那么很有可能你大部分数据都被分配一个节点上（违背了分布式数据 的初衷），因此，你的行键应该是有足够的差异性以便分布式地通过整个部署。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在Hbase中表可以设计为高表(tall-narrow table)和宽表(flat-wide table)的形式  高表指的是列少行多  宽表反之</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 AllForOne&#39;s Site,Your genneration comes!
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1overview-hbase">1.Overview Hbase</a>
+      <ol>
+        <li><a href="#11数据模型">1.1数据模型</a></li>
+        <li><a href="#12-hbase基本架构">1.2 Hbase基本架构</a></li>
+        <li><a href="#13-hbase的安装和配置">1.3 Hbase的安装和配置</a></li>
+        <li><a href="#14-hbase-shell操作">1.4 HBase Shell操作</a></li>
+        <li><a href="#15hbase的读写流程">1.5Hbase的读写流程</a></li>
+        <li><a href="#16hbase特性">1.6Hbase特性</a></li>
+        <li><a href="#17应用场景">1.7应用场景</a></li>
+        <li><a href="#18hbase与关系型数据库的区别">1.8Hbase与关系型数据库的区别</a></li>
+        <li><a href="#19hbase的启动命令">1.9hbase的启动命令</a></li>
+      </ol>
+    </li>
+    <li><a href="#2hbase基础">2.Hbase基础</a>
+      <ol>
+        <li><a href="#21-hbase表的物理属性">2.1 Hbase表的物理属性</a></li>
+        <li><a href="#22region">2.2Region</a></li>
+      </ol>
+    </li>
+    <li><a href="#3">3.</a>
+      <ol>
+        <li><a href="#1hbase的存储逻辑">1.HBase的存储逻辑</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/AllForOne/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

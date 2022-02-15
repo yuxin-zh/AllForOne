@@ -2,14 +2,12 @@
 title: "Git学习路线"
 date: 2022-02-15T00:01:02+08:00
 draft: false
-cover : "b1.jpg"
+image: b1.jpg
 ---
 
 [TOC]
 
 # Git
-
-![](img/b1.jpg)
 
 ## 1.版本控制系统（VCS)
 

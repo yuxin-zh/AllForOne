@@ -6,22 +6,1572 @@
         <description>Recent content on AllForOne&#39;s Site,Your genneration comes!</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 15 Feb 2022 00:01:02 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 16 Feb 2022 00:55:19 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Spring</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/spring/</link>
+        <pubDate>Wed, 16 Feb 2022 00:55:19 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/spring/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/spring/b5.jpg" alt="Featured image of post Spring" /&gt;</description>
+        </item>
+        <item>
+        <title>Linux</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/linux/</link>
+        <pubDate>Wed, 16 Feb 2022 00:54:24 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/linux/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/linux/b4.jpg" alt="Featured image of post Linux" /&gt;</description>
+        </item>
+        <item>
+        <title>Hbase</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/hbase/</link>
+        <pubDate>Wed, 16 Feb 2022 00:53:15 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/hbase/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/hbase/b3.jpg" alt="Featured image of post Hbase" /&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;https://www.jianshu.com/p/bcc54f63abe4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&#34;hbase&#34;&gt;Hbase&lt;/h1&gt;
+&lt;h2 id=&#34;1overview-hbase&#34;&gt;1.Overview Hbase&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;是一种分布式 可拓展 支持海量数据存储的NoSQL数据库&lt;/li&gt;
+&lt;li&gt;hdfs不支持随机写，基于HDFS，hbase可以实现随时写&lt;/li&gt;
+&lt;li&gt;hadoop和habase都是存储大量数据的 但不同的是hadoop的分布式文件系统中，数据分布在网络的不同节点中 而hbase是个数据库 列行的形式存储&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;11数据模型&#34;&gt;1.1数据模型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;NameSpace：类似于关系数据库中的database概念，每个ns下有多个表。Hbase自带两个ns：hbase和default.hbase。 hbase存放的是HBase内置的表，default表是用户默认使用的命名空间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Region：表的切片 。刚开始创建就一个region&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Row：Hbase表中的每行数据都由一个Rowkey和多个列组成，数据是按照Rowkey的字典序进行存储的，&lt;strong&gt;并且查询时只能根据rowkey进行查询&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Column：hbase每个列都由Column Family和Column Qualifier（列限定符）进行限定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TimeStamp：用于标识数据的不同版本，数据仔写入时，不指定的话，系统会自动为其加上该字段，值为写入hbase的时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cell：由{Rowkey，clolumn Family，clolumn Qualifier，timeStamp}唯一确定的单元，&lt;strong&gt;cell中的数据是没有类型的，全部是字节码的形式存在。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-hbase基本架构&#34;&gt;1.2 Hbase基本架构&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Store&amp;ndash;&amp;gt;Region&amp;ndash;&amp;gt;Region Server(分布式服务)
+&lt;ul&gt;
+&lt;li&gt;RegionServer：DML 对表中数据进行操作
+&lt;ul&gt;
+&lt;li&gt;Data：get，put（提交新数据覆盖元数据，而不是修改元数据），delete&lt;/li&gt;
+&lt;li&gt;Region：splitRegion，compactRegion     切分和合并&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Master挂掉的话，数据的增删改查仍可以，但是做表结构的不行  &lt;strong&gt;master管理ddl&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Master：DDL 对表进行操作
+&lt;ul&gt;
+&lt;li&gt;Table：create,delete,alter  &lt;strong&gt;关于表进行操作&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;RegionServer：分配Regions到每个Regionserver，监控每个RegionServer的status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Zookeeper：&lt;strong&gt;HBase通过Zookeeper来做master的高可用&lt;/strong&gt;、RegionServer的监控，元数据的入口以及集群配置的维护等工作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;13-hbase的安装和配置&#34;&gt;1.3 Hbase的安装和配置&lt;/h3&gt;
+&lt;h3 id=&#34;14-hbase-shell操作&#34;&gt;1.4 HBase Shell操作&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#general&lt;/span&gt;
+status：
+&lt;span class=&#34;c1&#34;&gt;#ddl&lt;/span&gt;
+alter：
+1）add 列族到表中
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;表名&amp;#39;&lt;/span&gt;，NAME&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;列族名&amp;#39;&lt;/span&gt;，VERSIONS&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;5
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;t1&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;f1&amp;#39;&lt;/span&gt;, &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;NAME&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;f2&amp;#39;&lt;/span&gt;, &lt;span class=&#34;nv&#34;&gt;IN_MEMORY&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; true&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;, &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;NAME&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;f3&amp;#39;&lt;/span&gt;, &lt;span class=&#34;nv&#34;&gt;VERSIONS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; 5&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; delte 列族
+alter &lt;span class=&#34;s2&#34;&gt;&amp;#34;ns:表名&amp;#34;&lt;/span&gt;,NAME&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;列族名&amp;#39;&lt;/span&gt;，METHOD&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns:表名&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;f1&amp;#39;&lt;/span&gt;
+
+3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;change table-scope的属性 like below
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;table 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;name&amp;#39;&lt;/span&gt;,MAX_FILESIZE&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;134217728&amp;#39;&lt;/span&gt;
+
+4&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;设置coprocessor   不知道是否仔niit范围内，可以课下学学
+
+5&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 通过hbase命令行设置habse的配置信息
+
+6&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; Regin_Replication
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;table_name&amp;#39;&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;REGION_REPLICATION&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;2&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+7&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;disable/enable table split or merge
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;tn&amp;#39;&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;SPLIT_ENABLED&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;false&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+alter &lt;span class=&#34;s1&#34;&gt;&amp;#39;tn&amp;#39;&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;MERGE_ENABLED&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;false&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+alter_status:#Get the status of the alter command. Indicates the number of regions of thetable that have received the updated schema ,Passed by table name.
+
+create:
+create &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns:tn&amp;#39;&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;NAME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;,VERSIONS&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;,&lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+desc &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns;tn&amp;#39;&lt;/span&gt;
+
+disable:
+disable &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns:tn&amp;#39;&lt;/span&gt;
+disable_all
+
+drop: should be executed after &lt;span class=&#34;s2&#34;&gt;&amp;#34;disable&amp;#34;&lt;/span&gt;
+drop &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns:tn&amp;#39;&lt;/span&gt;
+drop_all
+
+enable:
+&lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns:tn&amp;#39;&lt;/span&gt;
+enable_all
+
+exits:判断表是否存在
+exists &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns;tb&amp;#39;&lt;/span&gt;
+
+get_table: &lt;span class=&#34;c1&#34;&gt;#Get the given table name and return it as an actual object to be manipulated by the user&lt;/span&gt;
+
+
+&lt;span class=&#34;c1&#34;&gt;#namespacelis&lt;/span&gt;
+
+create_namespace &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns1&amp;#39;&lt;/span&gt;
+describe_namespace &lt;span class=&#34;s1&#34;&gt;&amp;#39;ns1&amp;#39;&lt;/span&gt; desc不行
+drop_namespace &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+list_namespace
+
+&lt;span class=&#34;c1&#34;&gt;#DML&lt;/span&gt;
+append &lt;span class=&#34;s1&#34;&gt;&amp;#39;t1&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;r1&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;c1&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;相当于String的append value加在原有value的后
+
+count: 计数一个表中的row数量
+count &lt;span class=&#34;s1&#34;&gt;&amp;#39;tn&amp;#39;&lt;/span&gt;
+或者建立一个t-&amp;gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tn&amp;#39;&lt;/span&gt;的reference
+t.count也可以
+
+&lt;span class=&#34;c1&#34;&gt;#####Get &amp;amp;&amp;amp;&amp;amp;&amp;amp; Scan&lt;/span&gt;
+
+get的最大范围是指定到rowkey，甚至还可以指定到时间戳
+&lt;span class=&#34;c1&#34;&gt;#利用scan查看同一个cell之前已经put的数据（scan时可以设置是否开启RAW模式，开启RAW模式会返回已添加删除标记但是未实际进行删除的数据）&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#get获取某个cell保留的（未添加删除标记）的所有version数据（在describe 表名，查看列族VERSIONS是多少，get就会多少数据(cell的数据大于等于VERSIONS的数量)）&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;15hbase的读写流程&#34;&gt;1.5Hbase的读写流程&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;对于hbase来说  读比写要慢&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;写流程
+&lt;ul&gt;
+&lt;li&gt;like put的流程：首先client会&amp;mdash;-请求meta表所在的RegionServer&amp;mdash;&amp;gt; ZooKeeper&amp;mdash;-meta:hadoop02&amp;mdash;&amp;ndash;&amp;gt;client   &lt;strong&gt;meta表存的就是元数据&lt;/strong&gt;    然后client&amp;mdash;请求meta&amp;mdash;-&amp;gt;hadoop02&amp;mdash;&amp;mdash;返回meta 获取RS&amp;mdash;&amp;ndash;&amp;gt;client&amp;mdash;&amp;ndash;元数据存入缓存&amp;mdash;&amp;ndash;&amp;gt;meta cache(下次查找会先查询缓存，不存在则请求ZK)  找到后client&amp;mdash;发送Put请求&amp;mdash;-&amp;gt;RegionServer&amp;mdash;&amp;gt;wal&amp;mdash;-&amp;gt;memstore&amp;mdash;&amp;ndash;&amp;gt;client&lt;/li&gt;
+&lt;li&gt;注意windows时间与linux时间未统一的话，不要传时间戳参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;16hbase特性&#34;&gt;1.6Hbase特性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;容量大&lt;/li&gt;
+&lt;li&gt;面向列&lt;/li&gt;
+&lt;li&gt;稀疏性：null的空列不占用存储空间&lt;/li&gt;
+&lt;li&gt;拓展性：Hbase可以动态增加regionserver&lt;/li&gt;
+&lt;li&gt;高性能：LSM数据结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;17应用场景&#34;&gt;1.7应用场景&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;搜索引擎&lt;/li&gt;
+&lt;li&gt;增量数据存储&lt;/li&gt;
+&lt;li&gt;OPENTSDB&lt;/li&gt;
+&lt;li&gt;捕捉用户交互数据&lt;/li&gt;
+&lt;li&gt;广告效果和点击流&lt;/li&gt;
+&lt;li&gt;内容服务&lt;/li&gt;
+&lt;li&gt;信息交换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;18hbase与关系型数据库的区别&#34;&gt;1.8Hbase与关系型数据库的区别&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HBase 里面有以下 2 个主要概念：
+&lt;ul&gt;
+&lt;li&gt;Rowkey: HBase 中的记录是按照 rowkey 来排序的；&lt;/li&gt;
+&lt;li&gt;Column family：(列族)是在系统启动之前预先定义好的；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;HBase 优缺点：
+&lt;ul&gt;
+&lt;li&gt;不支持条件查询以及 orderby 等查询；&lt;/li&gt;
+&lt;li&gt;列可以动态增加，列为空则不存储数据，节省存储空间；&lt;/li&gt;
+&lt;li&gt;会自动切分数据；&lt;/li&gt;
+&lt;li&gt;可以提供高并发读写操作的支持；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;注意事项
+&lt;ul&gt;
+&lt;li&gt;Row key 行键 (Row key)可以是任意字符串(最大长度是 64KB，实际应用中长度一般为 10- 100bytes)，在 hbase 内部，row key 保存为字节数组。&lt;/li&gt;
+&lt;li&gt;列族是表的 schema 的一部分(而列不是)，必须在使用表 之前定义。&lt;/li&gt;
+&lt;li&gt;HBase 中通过 row 和 columns 确定的为一个存贮单元称为 cell。每个 cell 都保存着同一份数据的 多个版本&lt;/li&gt;
+&lt;li&gt;cell 中的数据是没有 类型的，全部是字节码形式存贮。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HBASE 强依赖 hadoop 的 hdfs 系统，hbase 的版本需要和 hadoop 的版本匹配，否则会出现一些意 外情况&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;19hbase的启动命令&#34;&gt;1.9hbase的启动命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;启动单机模式：&lt;strong&gt;bin/start-hbase.sh&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;查看进程：&lt;strong&gt;jps&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;启动集群：start-hbase。sh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2hbase基础&#34;&gt;2.Hbase基础&lt;/h2&gt;
+&lt;h3 id=&#34;21-hbase表的物理属性&#34;&gt;2.1 Hbase表的物理属性&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Table 在行的方向上分割为多个 Region；&lt;/li&gt;
+&lt;li&gt;Region 按大小分割的，每个表开始只有一个 region，随着数据增多，region 不断增 大，当增大到一个阀值的时候，region 就会等分会两个新的 region，之后会有越来 越多的 region；&lt;/li&gt;
+&lt;li&gt;Region 是 Hbase 中分布式存储和负载均衡的&lt;strong&gt;最小单元&lt;/strong&gt;，&lt;strong&gt;不同 Region 分布到不同 RegionServer 上。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22region&#34;&gt;2.2Region&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Region组成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Region 由一个或者多个 Store 组成，每个 store 保存一个 columns family；&lt;/li&gt;
+&lt;li&gt;每个 Strore 又由一 个 memStore 和 0 至多个 StoreFile 组成，StoreFile 包含 HFile；memStore 存储在内存中， StoreFile 存储在 HDFS 上&lt;/li&gt;
+&lt;li&gt;Region 虽然是分布式存储的最小单元，但并不是存储的最小单元，Region 默认大小是 256M，当一个 Region 大小超过设置的值，Hmaster 会将 Region 拆分为 2 个子 Region，同时父 Region 下线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;RegionServer(DML)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Region server 维护 Master 分配给它的 region，处理对这些 region 的 IO 请求 &lt;/li&gt;
+&lt;li&gt;Region server 负责切分在运行过程中变得过大的 regio&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hmaster&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管理用户对 Table 的增、删、改、查操作 &lt;/li&gt;
+&lt;li&gt;管理 RegionServer 的负载均衡、调整 Region 的分布 &lt;/li&gt;
+&lt;li&gt;在 Region Split 后，将新 Region 分布到不同的RegionServer。 &lt;/li&gt;
+&lt;li&gt;在 RegionServer 宕机后，那该 RegionServer 上所管理的 Region 由 HMaster 进行重新分 配。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;管理类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HbaseAdmin：提供接口关系 HBase 数据库中的表信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;HBaseAdmin&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;admin&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HBaseAdmin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTableDescriptor:维护表的信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;setMaxFileSize&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;指定最大的&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;region&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;setMemStoreFlushSize&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;指定&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;memstore&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;flush&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;到&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HDFS&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;上的文件大小&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;通过&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addFamily&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;方法增加&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;famil&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HColumnDescriptor: 代表的是 column 的 schema，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;nl&#34;&gt;setTimeToLive:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;指定最大的&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TTL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;单位是&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ms&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;过期数据会被自动删除&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setInMemory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;指定是否放在内存中&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;对小表有用&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;可用于提高效率&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;默认关闭&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setBloomFilter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;指定是否使用&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BloomFilter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;可提高随机查询效率&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;默认关闭&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setCompressionType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;设定数据压缩类型&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;默认无压缩&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setMaxVersions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;指定数据最大保存的版本个数&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;默认为&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;HTableDescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;htd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newHTableDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tablename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;htd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addFamily&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HColumnDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;myFamily&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3&#34;&gt;3.&lt;/h2&gt;
+&lt;h3 id=&#34;1hbase的存储逻辑&#34;&gt;1.HBase的存储逻辑&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HBase 的表中的数据分隔是使用列族而不是列。每个列族对应一个 HFile 文件，在 HDFS 上以一个 目录的形式存放。&lt;/li&gt;
+&lt;li&gt;Key-Value存储模型：
+&lt;ul&gt;
+&lt;li&gt;key是RowKey，Value是列族的集合。&amp;mdash;&amp;gt;也就是说我们可以通过rowkey检索到value&lt;/li&gt;
+&lt;li&gt;行键的设计：、
+&lt;ul&gt;
+&lt;li&gt;表扫描是对行键的操作，所以，&lt;strong&gt;行键的设计控制着你能够通过 HBase 执行的实时/直接获取量。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;当在生产环境中运行 HBase 时，它在 HDFS 上部运行，数据基于行键通过 HDFS，如果你所有的 行键都是以 user-开头，那么很有可能你大部分数据都被分配一个节点上（违背了分布式数据 的初衷），因此，你的行键应该是有足够的差异性以便分布式地通过整个部署。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在Hbase中表可以设计为高表(tall-narrow table)和宽表(flat-wide table)的形式  高表指的是列少行多  宽表反之&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Hadoop Learning</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/</link>
+        <pubDate>Wed, 16 Feb 2022 00:42:52 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/b2.jpg" alt="Featured image of post Hadoop Learning" /&gt;&lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&#34;hadoop相关概念&#34;&gt;Hadoop相关概念&lt;/h1&gt;
+&lt;p&gt;BIg Data&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;	Volume  
+	Velocity（快速） 
+	Variety (结构化数据和非结构化数据)
+	Value(低价值密度)：价值密度的大小与数据总量的大小成反比
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;HIVE：存储 查询和分析存储在hdfs上的大量数据&lt;/p&gt;
+&lt;p&gt;缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传  速度很慢&lt;/p&gt;
+&lt;p&gt;ZOOkeeper“zn+1哥服务器允许n此错误。&lt;/p&gt;
+&lt;p&gt;结构化数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;数据库这种有二维表格的
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;半结构化数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;类似于一个文件，但是可以导入mysql这种结构化数据中
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;非结构化数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;无法转化，视频，ppt等
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Hadoop&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;分布式系统基础架构：多台服务器共同完成某一任务
+主要解决海量数据的存储和分析计算
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;三大发行版本&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;Apache 最基础
+Cloudera   Horntownworks
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Hadoop优势&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided
+高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除
+高效性：hadoop是并行工作的
+高容错性：能够自动将失败任务重新分配
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;hadoop组成（important）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;Hadoop 1.x:
+	HDFS:数据存储   
+	Mapduce：计算+资源调度
+	Common：辅助工具
+Hadoop 2.x:
+	多了Yarn用于资源调度
+Hadoop 3.x：
+	在组成上没有区别
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;HDFS数据存储&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;NameNode:存储文件的元数据，如文件名，文件目录结构，文件属性等 保存在linux中
+DataNode：存储文件块数据，以及快数据的校验和{
+	文件块：最基本的存储单位
+	HDFS默认的block大小是64MB（老版本)
+	不同于普通文件系统的是，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间
+	Replication：多复本  默认是三个，可通过配置文件配置
+}
+2NN:每隔一段时间对NameNode元数据备份,只能恢复一部分数据而非所有
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;关于replication的解析：&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;Yarn架构&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;Resource Manager:管理整个集群资源  rm将资源部份安排给基础大的Node Manager
+&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+	*NM遵循来自RM的一些指令来管理单一节点上的可用资源
+	*AM负责与RM协商资源并于NM合作启动容器
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+Node Manager:管理单个节点的服务器资源  是yarn中每个节点上的代理  与RM通讯 监督container的生命周期
+ApplicationMaster：单个运行任务的boss 流程如下
+	和rm协商，获取资源 通过rm来获取任务 和NM启动任务 Map或Reduce
+---------------	
+Container：容器，相当于于一台独立服务器，封装任务运行需要的资源  封装的是某个DataNode节点上的资源
+AppMaster请求资源时，RM以container的形式返回资源
+
+Scheduler:资源调度器根据队列容量，队列限制，为每个应用分配一定的资源。（只是单纯的资源调度，不参与任何任务状态管理）
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;MapReduce架构&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;计算分为两个阶段：Map 和Reduce
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/1.png&#34;
+	width=&#34;2340&#34;
+	height=&#34;1080&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/1_hu6d73c86b86e7571b9382801cf6222d7f_493148_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/1_hu6d73c86b86e7571b9382801cf6222d7f_493148_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20210913180309582&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;520px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;HDFS&amp;amp;Yarn&amp;amp;MapReduce&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;remain to be &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Hadoop运行模式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;Local:数据存储再linux本地，从本地读取  ~测试偶尔会用
+伪分布式（pseudo-distributed）：数据存储在HDFS ~公司比较差钱
+完全分布式（fully-distributed）:数据也是存储在HDFS，但是多台服务器工作 ~大量使用
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;tip&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;后续写的mapreduce程序必须指定对应的输入路径和输出路径，而且输出路径还不能存在，存在的话会直接抛出异常。 Get it!
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Hadoop官方文档：&lt;/strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FileSystem (Apache Hadoop Main 3.3.1 API)&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;hdfs&#34;&gt;HDFS&lt;/h1&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;分布式文件系统，建立在一次写入，多次读取的思想上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个hdfs集群是由一个namenode和多个datanode形成&lt;/strong&gt;，内部机制是将一个文件分割成一个或多个的block，这些块储存在一组数据节点中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;namenode负责文件或目录的“打开，关闭，重命名等”,并确定块与数据节点的映射。而数据节点负责来自文件系统客户的读写请求&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;hdfs-块&#34;&gt;HDFS 块&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;默认的最基本的存储单位是64M的数据块**（默认大小在hadoop2.x版本中是128M，老版本中是64M）**&lt;/li&gt;
+&lt;li&gt;HDFS的文件是被分成64M一块的数据块进行存储的&lt;/li&gt;
+&lt;li&gt;HDFS中若一个文件大小小于64M，并不占用整个存储空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1hadoop-block存放策略&#34;&gt;1）hadoop block存放策略&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个block放在client所在的node里面&lt;/li&gt;
+&lt;li&gt;第二个放在与第一个不同的机架中的node中&lt;/li&gt;
+&lt;li&gt;第三个放在与第一个块的同一个机架的不用node中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2namenode和datanode&#34;&gt;2）NameNode和DataNode&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;NameNode(元数据节点)：用来管理文件系统的命名空间
+&lt;ul&gt;
+&lt;li&gt;将所有文件和文件夹的元数据保存在一个system tree上（ 元数据 ：指用来描述一个 文件 的特征的系统数据，诸如访问权限、 文件 拥有者、以及 文件 数据块的分布信息等等）&lt;/li&gt;
+&lt;li&gt;也同时会在硬盘上保存成这些文件：namespace image 和editlog&lt;/li&gt;
+&lt;li&gt;也存储了一个文件包含哪些数据块，分布在哪些数据节点上&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意：这些信息并不真正存储在硬盘 而是存放在数据节点中&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;client和namenode可以向数据节点请求写入或者读出数据块，并周期性的向namenode汇报其存储的数据块信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;元数据节点目录结构：在hdfs-site.xml中配置dfs.name.dir参数&lt;/strong&gt;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nv&#34;&gt;namespaceID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;123214214&lt;/span&gt; 文件系统的唯一标识符 在文件系统初始化时生成的
+&lt;span class=&#34;nv&#34;&gt;ClusterID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;xxxxxxxxx   系统生成或手动指定的集群ID，可以在-clusteid选项中使用
+&lt;span class=&#34;nv&#34;&gt;cTime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;               0此处标识namenode的创建时间，更新nd后会更新时间戳
+&lt;span class=&#34;nv&#34;&gt;storageType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;NAME_NODE 表示此文件夹中保存的是元数据节点的数据结构
+LayoutVersion 		  保存格式版本号
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/2.png&#34;
+	width=&#34;1386&#34;
+	height=&#34;736&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/2_hu115e04f43b127b90fd44e1735f6f134b_265774_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/2_hu115e04f43b127b90fd44e1735f6f134b_265774_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211127201044656&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;451px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;checkpoint的作用：1）保证数据库的一致性，这是指将脏数据写入到硬盘，保证内存和硬盘上的数据是一样的;2）缩短实例恢复的时间&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3hdfs通信协议&#34;&gt;3）HDFS通信协议&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/3.png&#34;
+	width=&#34;1350&#34;
+	height=&#34;296&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/3_hu5fd8fe86c85adec8a205f1774f8e7cc2_246538_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/3_hu5fd8fe86c85adec8a205f1774f8e7cc2_246538_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211127211253785&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;456&#34;
+		data-flex-basis=&#34;1094px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4hdfs的安全模式&#34;&gt;4）HDFS的安全模式&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/4.png&#34;
+	width=&#34;1342&#34;
+	height=&#34;273&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/4_huc649dcf599d37fd25fc28a9ab18450dd_290897_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/4_huc649dcf599d37fd25fc28a9ab18450dd_290897_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211127211332872&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;491&#34;
+		data-flex-basis=&#34;1179px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5客户端读文件&#34;&gt;5）客户端读文件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//工具类获取FileSystem
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;域名&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//like &amp;#34;hdfs://niit1:9000&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Configuration&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Configuration&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URI&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;你的用户名,也可以不加，区别建议查阅官方API&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;hdfs://niit1:9000&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Configuration&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Configuration&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URI&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+
+        &lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file_content_buff&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;hello hadoop world,test write file! \n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getBytes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//以字节数组的形式读取字符串
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/user/root/niit/nn.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//写入文件路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;FSDataOutputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;outputStream&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//create file两种形式 1）使用setpermission提供的权限来设置权限 2）将配置中的umask改为0---&amp;gt;但并非线程安全的
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;outputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file_content_buff&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file_content_buff&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//写入文件
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;code&gt;static FileSystem&lt;/code&gt;&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;get(URI uri, Configuration conf)&lt;/code&gt;Get a FileSystem for this URI&amp;rsquo;s scheme and authority.&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;static FileSystem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;get(URI uri, Configuration conf, String user)&lt;/code&gt;Get a FileSystem instance based on the uri, the passed in configuration and the user.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;6客户端写文件&#34;&gt;6）客户端写文件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;  &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GetFileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//GetFileSystem是上面的工具类 用来获取FileSystem
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;InputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;//Opens an FSDataInputStream at the indicated Path.
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/user/root/niit/nn1.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;IOUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;copyBytes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;in&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;//(InputStream in, OutputStream out, int buffSize, boolean close)
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;IOUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;closeStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;in&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;7本地文件上传到hdfs&#34;&gt;7）本地文件上传到HDFS&lt;/h3&gt;
+&lt;p&gt;使用 &lt;strong&gt;copyFromLocalFile&lt;/strong&gt;接口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GetFileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;src&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;本地文件路径&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;目标路径&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;copyFromLocalFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;desc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;8重命名文件&#34;&gt;8）重命名文件&lt;/h3&gt;
+&lt;p&gt;使用rename（抽象类）返回布尔值&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt; &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GetFileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//已经在classpath下面加载了hdfs-site.xml和core-site.xml的配置文件，则会自动理解输入的文件路径为hdfs的
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;当前文件路径及文件名&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;desName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;目标文件名&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;//是否可以同时修改文件路径?YESSSSSSS!!!!
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;rename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CurrentName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;desName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;修改成功&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;修改失败&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;9delete-file--directory&#34;&gt;9）Delete File &amp;amp; Directory&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GetFileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;删除的目标地址&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;deleRe&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;delete&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;deleRe&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;10创建目录和遍历目录&#34;&gt;10）创建目录和遍历目录&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;创建过程和删除相似  无非是使用了mkdirs接口罢了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;遍历目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;  &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;FileSystem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GetFileSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSystem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;FileStatus&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fsstatus&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;listStatus&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/user/root&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FileStatus&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fsstatus&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;isFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;())&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;file:&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getPath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;toString&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;directory:&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getPath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;toString&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;code&gt;abstract FileStatus[]&lt;/code&gt;&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;listStatus(Path f)&lt;/code&gt;List the statuses of the files/directories in the given path if the path is a directory.&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FileStatus[]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;listStatus(Path[] files)&lt;/code&gt;Filter files/directories in the given list of paths using default path filter.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FileStatus[]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;listStatus(Path[] files, PathFilter filter)&lt;/code&gt;Filter files/directories in the given list of paths using user-supplied path filter.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FileStatus[]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;listStatus(Path f, PathFilter filter)&lt;/code&gt;Filter files/directories in the given path using the user-supplied path filter.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;hadoopshell-commands&#34;&gt;HadoopShell Commands&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;n&#34;&gt;阿巴阿巴&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;hadoop-io&#34;&gt;Hadoop IO&lt;/h1&gt;
+&lt;h2 id=&#34;1序列化&#34;&gt;1）序列化&lt;/h2&gt;
+&lt;p&gt;序列化：&lt;strong&gt;将结构化对象转化为字节流以便于通过网络进行传输或写入持久存储的过程 反序列化则反之&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Compact: 方便网络传输&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fast：性能好&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Extensible：协议有变化 可以支持新的需求（动态）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Interoperable：客户端和服务器端不依赖语言的实现（怎么去理解）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hadoop使用writables，满足compact fast 但是不满足拓展性 （这种序列化时hadoop自己实现的，而不是java的序列化）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Serialization&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; 
+ &lt;span class=&#34;c1&#34;&gt;//客户端用于判断序列化实现是否支持该类对象 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;//获得用于序列化对象的 Serializer 实现 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Serializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getSerializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; 
+&lt;span class=&#34;c1&#34;&gt;//获得用于反序列化对象的 Deserializer 实现 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Deserializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getDeserializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; 
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2序列化流程&#34;&gt;2）序列化流程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;如果需要**使用 Serializer **来执行序列化，一般需要通过 &lt;strong&gt;open()&lt;strong&gt;方法打开 Serializer，open()方法传入一个 底层的流对象，然后就可以使用&lt;/strong&gt;serialize()方法序列化对象&lt;/strong&gt;到底层的流中。最后序列化结束时，通过 close()方法关闭 Serializer。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Serializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; 
+ &lt;span class=&#34;c1&#34;&gt;//为输出（序列化）对象做准备 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OutputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; 
+ 
+&lt;span class=&#34;c1&#34;&gt;//将对象序列化到底层的流中 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;serialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; 
+ 
+&lt;span class=&#34;c1&#34;&gt;//序列化结束，清理 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;3反序列化&#34;&gt;3）反序列化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果要使用 &lt;strong&gt;deserializer&lt;/strong&gt; 来执行反序列化，一般需要通过 open()方法打开 deserializer，open()方法传入 一个底层的流对象，然后就可以使用 deserializer()方法反序列化流到对象中。最后反序列化结束时， 通过 close()方法关闭 Serializer。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;deserializer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;in&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt; 
+&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;deserialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; 
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4writable接口&#34;&gt;4）Writable接口&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hadoop 的所有可序列化对象都必须实现 这个接口。Writable 接口里有两个方法，一个是 write 方法，将对象写入字节流，另一个是 readFields 方法，从字节流解析出对象&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;serialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;IntWritable&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;intWritable&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IntWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//生成流对象
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;ByteArrayOutputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byteArrayOutputStream&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ByteArrayOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;DataOutputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dataOutputStream&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DataOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;byteArrayOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//DataStream封装byteStream
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//Serilization the data  序列化对象到流中
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;intWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dataOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byteArray&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byteArrayOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;toByteArray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;dataOutputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;byteArray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byteArray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;deserialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;barr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;IntWritable&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;intWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IntWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;ByteArrayInputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byteArrayinputStream&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ByteArrayInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;barr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;DataInputStream&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dataInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DataInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;byteArrayinputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;intWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;readFields&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dataInputStream&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;intWritable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+        &lt;span class=&#34;c1&#34;&gt;//writable必不可少
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/5.png&#34;
+	width=&#34;1466&#34;
+	height=&#34;696&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/5_hudc5020dc62f5b8fce39e63326cca4045_188636_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/5_hudc5020dc62f5b8fce39e63326cca4045_188636_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211128155901456&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;210&#34;
+		data-flex-basis=&#34;505px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5writablecomparable&#34;&gt;5）WritableComparable&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;WritableComparable 接口是可序列化并且可比较的接口，MapReduce 中所有的 key 值类型都必须实现 这个接口。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6压缩smile&#34;&gt;6）压缩:smile:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;GZIP:
+&lt;ul&gt;
+&lt;li&gt;压缩率较高，速度较快，hadoop本身就支持，使用方便，支持 hadoop native 库&lt;/li&gt;
+&lt;li&gt;不支持split&lt;/li&gt;
+&lt;li&gt;当每个文件压缩之后在 130M 以内的（1 个块大小内），都可以考虑用 gzip 压缩格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;LZO：
+&lt;ul&gt;
+&lt;li&gt;压缩速度很快，压缩率合理，支持split，hadoop最流行的压缩格式&lt;/li&gt;
+&lt;li&gt;压缩率比gzip低，hadoop本身并不支持，需要安装&lt;/li&gt;
+&lt;li&gt;应用场景：一个很大的文本文件，压缩之后还大于 200M 以上的可以考虑，而且单个文件越大，lzo 优点越越明显。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Snappy:
+&lt;ul&gt;
+&lt;li&gt;高速压缩速度和合理的压缩率；支持 hadoop native 库&lt;/li&gt;
+&lt;li&gt;不支持 split；压缩率比 gzip 要低；hadoop 本身不支持，需要安装；linux 系统下没有对应 的命令。&lt;/li&gt;
+&lt;li&gt;应用场景：mapreduce中map输出的数据较大，可作为map到reduce的中间数据的压缩格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;bzip2
+&lt;ul&gt;
+&lt;li&gt;支持 split；具有很高的压缩率，比 gzip 压缩率都高；hadoop 本身支持，但不支持 native&lt;/li&gt;
+&lt;li&gt;压缩/解压速度慢；不支持 native。&lt;/li&gt;
+&lt;li&gt;适合对速度要求不高，但需要较高的压缩率的时候，可以作为 mapreduce 作业的输出格 式；或者输出之后的数据比较大，处理之后的数据需要压缩存档减少磁盘空间并且以后数据用得比 较少的情况；或者对单个很大的文本文件想压缩减少存储空间，同时又需要支持 split，而且兼容之 前的应用程序（即应用程序不需要修改）的情况。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CompressionCodec 对流进行压缩和解压缩&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;每一种编码器(Compressor)/解码器(Decompressor)最后统一的交由编码解码器(CompressionCodec) 来管理&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/13.png&#34;
+	width=&#34;1486&#34;
+	height=&#34;510&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/13_hu980d255d7092880c05cc42fe4286f944_88295_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/13_hu980d255d7092880c05cc42fe4286f944_88295_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211128162410728&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;291&#34;
+		data-flex-basis=&#34;699px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;暂时没搞明白-实现原理sob&#34;&gt;暂时没搞明白 实现原理。:sob:&lt;/h3&gt;
+&lt;h2 id=&#34;7特殊文件处理-cry&#34;&gt;7）特殊文件处理 :cry:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;需求：在处理小文件上低效率和小号磁盘空间的问题&lt;/li&gt;
+&lt;li&gt;SOlUTION:使用容器：SequenceFile  MapFile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SequenceFile：一种二进制文件支持，直接将&amp;lt;key,value&amp;gt;对序列化到文件中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持压缩，定制基于record或block压缩&lt;/li&gt;
+&lt;li&gt;简单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在SequenceFile文件中，每一个KV被看作一条记录，所以基于Record的压🔒策略，可以支持三种压缩类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;None：对record不压缩&lt;/li&gt;
+&lt;li&gt;RECORD:仅仅压缩每一个record中的value&lt;/li&gt;
+&lt;li&gt;BLOCK:将一个block中所有records压缩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;创建SequenceFile&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;Remains&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;be&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;done&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;rpc协议&#34;&gt;RPC协议&lt;/h1&gt;
+&lt;h2 id=&#34;1定义&#34;&gt;1）定义&lt;/h2&gt;
+&lt;p&gt;远程方法调用，允许计算机程序远程调用另一台计算机的子程序。&lt;/p&gt;
+&lt;h2 id=&#34;2feature&#34;&gt;2）Feature&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;透明性：远程调用其他机器上的程序，对用户来说就像是调用本地方法一样；&lt;/li&gt;
+&lt;li&gt;高性能：RPC server 能够并发处理多个来自 Client 的请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3cs-模式&#34;&gt;3）C/S 模式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Client 端发送一个带有参数的请求信息到 Server&lt;/li&gt;
+&lt;li&gt;Server 接收到这个请求以后，根据发送过来的参数调用相应的程序，然后把自己计算好的结果 发送给 Client 端；&lt;/li&gt;
+&lt;li&gt;Client 端接收到结果后继续运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;hadoop-prc机制&#34;&gt;Hadoop prc机制&lt;/h1&gt;
+&lt;h4 id=&#34;1rpc设计要求&#34;&gt;1.RPC设计要求&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;序列化层：C与S端通信采用了hadoop的序列化类或自定Writable类型&lt;/li&gt;
+&lt;li&gt;函数调用层：Hadoop RPC通过动态代理以及java反射实现函数调用&lt;/li&gt;
+&lt;li&gt;网络传输层：采用了基于TCP/IP的socket机制&lt;/li&gt;
+&lt;li&gt;服务器端框架层：知识盲区&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;核心框架原理&#34;&gt;核心框架原理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优点：易于编程，只用关系业务逻辑
+&lt;ul&gt;
+&lt;li&gt;良好拓展性：可以动态增加服务器，解决计算资源不够的问题&lt;/li&gt;
+&lt;li&gt;高容错性：任何一台机器挂掉，可以将任务转移到其他节点&lt;/li&gt;
+&lt;li&gt;适合海量数据的计算（TB/PB) 几千台服务器共同计算&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不擅长实时计算（mysql这样的擅长）&lt;/li&gt;
+&lt;li&gt;不擅长流式计算（Sparkstreaming flink）&lt;/li&gt;
+&lt;li&gt;不擅长DAG有向无环图计算 spark&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1mapreduce阶段引用图&#34;&gt;1）MapReduce阶段（引用图）&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/6.png&#34;
+	width=&#34;2153&#34;
+	height=&#34;1010&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/6_hua0e78e1b96a3ff33a6cc2c0fa0ae5a54_1224715_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/6_hua0e78e1b96a3ff33a6cc2c0fa0ae5a54_1224715_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211201231712166&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;213&#34;
+		data-flex-basis=&#34;511px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2mapreduce进程&#34;&gt;2）MapReduce进程&lt;/h4&gt;
+&lt;p&gt;一个完整的MapReduce程序在分布式运行时有三类实例进程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MrAppMaster:负责整个程序的过程调度和状态调度&lt;/li&gt;
+&lt;li&gt;MapTask：负责整个Map阶段的整个数据处理流程&lt;/li&gt;
+&lt;li&gt;ReduceTask：负责整个Reduce阶段的整个数据处理流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3mapreduce的编程规范&#34;&gt;3）MapReduce的编程规范&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Map阶段&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户自定义的Mapper需要继承自己的父类&lt;/li&gt;
+&lt;li&gt;Mapper的输入数据是KV对的形式（类型可以自定义）&lt;/li&gt;
+&lt;li&gt;Mapper中的业务逻辑实现在map方法中&lt;/li&gt;
+&lt;li&gt;Map的输出数据也是KV对的形式（同样可以自定义类型）&lt;/li&gt;
+&lt;li&gt;Map方法对每一个&amp;lt;K,V&amp;gt;调用一次（一行一行的调用，多次使用map）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Reduce阶段&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;继承父类&lt;/li&gt;
+&lt;li&gt;reducer的输入数据类型对应mapper的输出类型&lt;/li&gt;
+&lt;li&gt;Reducer的业务逻辑写在reduce阶段&lt;/li&gt;
+&lt;li&gt;ReduceTask进程对每一组k的&amp;lt;k,v&amp;gt;带哦用一次reduce方法（多少K就进行多少次reduce）&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/7.png&#34;
+	width=&#34;778&#34;
+	height=&#34;172&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/7_hu78810db735cea7fd66e93f5923ba4cfc_76244_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/7_hu78810db735cea7fd66e93f5923ba4cfc_76244_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211201232720654&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;452&#34;
+		data-flex-basis=&#34;1085px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Driver：相当于Yarn集群的客户端，用于提交我们整个正序到YARN集群，提交的是封装了MapReduce程序相关运行参数的job对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;mapreduce&#34;&gt;MapReduce&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/8.png&#34;
+	width=&#34;2160&#34;
+	height=&#34;1223&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/8_hu6e9e7ea6ee5c879249308f764aa7d097_909064_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/8_hu6e9e7ea6ee5c879249308f764aa7d097_909064_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211204203926980&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;423px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/9.png&#34;
+	width=&#34;2160&#34;
+	height=&#34;1263&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/9_hub0c5cc7827b5d53d3084d1c1b5daed45_707427_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/9_hub0c5cc7827b5d53d3084d1c1b5daed45_707427_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211204204034482&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;171&#34;
+		data-flex-basis=&#34;410px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1输入的数据inputformat数据输入&#34;&gt;1.输入的数据InputFormat数据输入&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Map切片大小设置为block大小时，效率最高&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1）一个job的Map阶段并行度由客户端在提交Job时的切片数决定（切了多少片，多少个Maptask  &lt;strong&gt;注意每一个文件需要单独切&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;2）每一个Split切片分配一个MapTask并行实例处理&lt;/li&gt;
+&lt;li&gt;3）默认情况，切片大小=BlockSize&lt;/li&gt;
+&lt;li&gt;4）切片时不考虑数据集整体，而是逐个针对每一个文件单独切片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Job提交流程源码分析&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;waitForCompletion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+   &lt;span class=&#34;n&#34;&gt;submit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;//1 建立连接
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+		&lt;span class=&#34;c1&#34;&gt;//1)创建提交Job的代理
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;		&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Cluster&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getConfiguration&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+			&lt;span class=&#34;c1&#34;&gt;//(1) 判断是本地运行环境还是yarn运行环境
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;			&lt;span class=&#34;n&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jobTrackAddr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;//2 提交Job
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;submitter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;submitJobInternal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Job&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cluster&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;// 1）创建给集群提交数据的Stag路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jobStagingArea&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;JobsubmissionFiles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getStagingDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cluster&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;conf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//2) 获取jobid 并创建job路径
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;JobID&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jobId&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;submitClient&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getNewJobID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+		&lt;span class=&#34;c1&#34;&gt;//3)如果是集群模式 拷贝jar包到集群
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;		&lt;span class=&#34;n&#34;&gt;copyAndConfigureFiles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;submitJobDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;rUploader&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;uploadFiles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jobsubmitDir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//4) 计算切片，生成切片规划文件
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;//5) 向stag路径写XML配置文件
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;//6) 提交JOB，返回提交状态
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/10.png&#34;
+	width=&#34;2141&#34;
+	height=&#34;1069&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/10_hu02af538ca6c78fb332c6b27485d26ead_650504_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/10_hu02af538ca6c78fb332c6b27485d26ead_650504_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211202001636660&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;200&#34;
+		data-flex-basis=&#34;480px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;afileinputformat切片源码解析&#34;&gt;a.FileInputFormat切片源码解析&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;程序先找到数据存储的目录&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;遍历处理目录下的每一个文件&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;遍历第一个文件ss&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;txt&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;获取文件大小fs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sizeOf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ss&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ttx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;计算切片大小&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;computeSplitSize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Math&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;minSize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Math&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;maxSize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blockSize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blocksize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;128M&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;默认情况下切片大小都是blocksize&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;开始切&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;形成第一个切片&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ss&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;txt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;128M&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;第二个切片ss&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;txt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;128&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;256&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;将切片信息写到一个切片规划文件中&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;整个切片的核心过程再getSplit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;方法完成&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InputSplit只记录了&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;切片的元数据信息&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;比如起始位置&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;长度以及所在的节点列表&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;提交切片规划文件到YARN上&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;YARN上的MrAppMaster就可以根据切片规划文件计算开启MapTask的个数&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;TextInputFormat是FileInputFormat的实现类 &amp;lt;Longwritable,Text&amp;gt;&lt;/p&gt;
+&lt;p&gt;键是存储改行再整个文件中的起始字节偏移量，V是这行的内容&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;KeyValueFormat &amp;lt;Text , Text&amp;gt;  第0位 KEY 后面是 Value&lt;/p&gt;
+&lt;h5 id=&#34;bcombinetextinputformat切片机制&#34;&gt;b.CombineTextInputFormat切片机制&lt;/h5&gt;
+&lt;p&gt;CombineTextInputFormat处理方式是一次读取多个文件，把所有文件集合再一起处理.&lt;/p&gt;
+&lt;p&gt;应用场景：用于小文件过多的场景，因为再默认框架中&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/11.png&#34;
+	width=&#34;1265&#34;
+	height=&#34;638&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/11_hu1b80369f3b0b4e2874d8678ab6c03f99_276696_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/11_hu1b80369f3b0b4e2874d8678ab6c03f99_276696_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211204194701843&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;475px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2shuffle&#34;&gt;2.Shuffle&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;map方法之后。reduce方法之前的过程都成为Shuffle&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/12.png&#34;
+	width=&#34;2140&#34;
+	height=&#34;1103&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/12_hua90695b097b4be83b2e61db8b2e47a35_825504_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/hadoop-learning/12_hua90695b097b4be83b2e61db8b2e47a35_825504_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20211204205758591&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;465px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;apartitioner&#34;&gt;&lt;strong&gt;a.Partitioner&lt;/strong&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注意：ReduceTask默认为1时，不会走默认的patitioner那个类，而是会运行那个一个内部类使得只有0这个分区&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;问题：要求将统计结果按照条件输出到不同为你暗中（分区），归属地不同省份输出到不同文件中（分区）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;默认分区是根据key的hashcode对Reduce&amp;rsquo;Task个数取模得到的。用户没法控制哪个Key存储到那个分区&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自定义Partitoner步骤&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;1）自定义类继承Partitioner，重写getPartitioner方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;www&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Partitioner&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FlowBean&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;{&lt;/span&gt;
+    &lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getPartitioner&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FlowBean&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;numpartitions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//控制分区代码业务逻辑
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;........&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;partition&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2）在job驱动中，设置自定义Partioner&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setPartitionerClass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CustomPartitioner&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3）自定义partitioner后，需要根据逻辑设置相应数量的ReduceTask&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;4）如果reduceTask数量大于getPartitioner的结果数，则会产生几个空的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;5）如果reduceTask数量大于1 小于getPartitioner的结果数，则有一部分分区数据无法安防，报错&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果reduceTask的数量为一，不管MapTask输出多少个分区的文件，结果都交由一个reduceTask，也就是产生一个结果文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b全排序&#34;&gt;b.全排序&lt;/h4&gt;
+&lt;p&gt;FlowBean需要实现WritableComparable接口重写compareTo()方法&lt;/p&gt;
+&lt;h4 id=&#34;c二次排序&#34;&gt;c.二次排序&lt;/h4&gt;
+&lt;h4 id=&#34;d区内排序&#34;&gt;d.区内排序&lt;/h4&gt;
+&lt;h4 id=&#34;ecombiner&#34;&gt;e.Combiner&lt;/h4&gt;
+&lt;p&gt;会对Key相同的进行合并，并且在MapTask处理一部分合并会提高效率（注意：不是所有都适用）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Combiner不属于Mapper和Reducer&lt;/li&gt;
+&lt;li&gt;combiner组件的父类是Reducer&lt;/li&gt;
+&lt;li&gt;Combiner和Reducer的区别在于运行的位置：前者在MapTask运行&lt;/li&gt;
+&lt;li&gt;自定义：基于wordCount的案例  自定义Combiner&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3输出数据outputformat&#34;&gt;3.输出数据OutputFormat&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;核心方法：recordWriter决定写出类型&lt;/li&gt;
+&lt;li&gt;自定义outputFormat：
+&lt;ul&gt;
+&lt;li&gt;过滤输出日志，包含atguigu的网站输出到&amp;hellip;，不包含&amp;hellip;.的输出到&amp;hellip;.&lt;/li&gt;
+&lt;li&gt;创建一个类LogRecordWriter继承RecordWriter
+&lt;ul&gt;
+&lt;li&gt;(a) 创建两个文件的输出流：aout，bout&lt;/li&gt;
+&lt;li&gt;(b)符合a条件的输出到aout ，其他的输出到bout&lt;/li&gt;
+&lt;li&gt;(c) 要将自定的输出格式组件设置到job中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4join&#34;&gt;4.Join&lt;/h3&gt;
+&lt;h3 id=&#34;5-etl&#34;&gt;5. ETL&lt;/h3&gt;
+&lt;h3 id=&#34;6总结&#34;&gt;6.总结&lt;/h3&gt;
+&lt;h3 id=&#34;7yarn在mapreduce中的作用&#34;&gt;7.Yarn在Mapreduce中的作用&lt;/h3&gt;
+</description>
+        </item>
+        <item>
         <title>Git学习路线</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
         <pubDate>Tue, 15 Feb 2022 00:01:02 +0800</pubDate>
         
         <guid>https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
-        <description>&lt;p&gt;[TOC]&lt;/p&gt;
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/b1.jpg" alt="Featured image of post Git学习路线" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h1 id=&#34;git&#34;&gt;Git&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/img/b1.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
 &lt;h2 id=&#34;1版本控制系统vcs&#34;&gt;1.版本控制系统（VCS)&lt;/h2&gt;
 &lt;h3 id=&#34;11-基本概念----行内代码&#34;&gt;1.1 基本概念    &lt;code&gt;...&lt;/code&gt;行内代码&lt;/h3&gt;
 &lt;ul&gt;
@@ -705,12 +2255,12 @@ git commit --amend
 </description>
         </item>
         <item>
-        <title>Chinese Test</title>
+        <title>Test</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
         <guid>https://yuxin-zh.github.io/AllForOne/p/test-chinese/</guid>
-        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/test-chinese/12.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;p&gt;wwwwww&lt;/p&gt;
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/test-chinese/12.jpg" alt="Featured image of post Test" /&gt;&lt;p&gt;wwwwww&lt;/p&gt;
 </description>
         </item>
         

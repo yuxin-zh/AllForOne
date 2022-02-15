@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='[toc]
+Hadoop相关概念 BIg Data
+1 2 3 4  Volume Velocity（快速） Variety (结构化数据和非结构化数据) Value(低价值密度)：价值密度的大小与数据总量的大小成反比   HIVE：存储 查询和分析存储在hdfs上的大量数据
+缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传 速度很慢
+ZOOkeeper“zn&#43;1哥服务器允许n此错误。
+结构化数据
+1  数据库这种有二维表格的   半结构化数据
+1  类似于一个文件，但是可以导入mysql这种结构化数据中   非结构化数据
+1  无法转化，视频，ppt等   Hadoop
+1 2  分布式系统基础架构：多台服务器共同完成某一任务 主要解决海量数据的存储和分析计算   三大发行版本
+1 2 3  Apache 最基础 Cloudera Horntownworks   Hadoop优势
+1 2 3 4  高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided 高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除 高效性：hadoop是并行工作的 高容错性：能够自动将失败任务重新分配   hadoop组成（important）'><title>Hadoop Learning</title>
+
+<link rel='canonical' href='https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/'>
+
+<link rel="stylesheet" href="/AllForOne/scss/style.min.6e28907171ccdc82609ab6675872e3dc961a1b00f252b4d0a9299bde606269c3.css"><meta property='og:title' content='Hadoop Learning'>
+<meta property='og:description' content='[toc]
+Hadoop相关概念 BIg Data
+1 2 3 4  Volume Velocity（快速） Variety (结构化数据和非结构化数据) Value(低价值密度)：价值密度的大小与数据总量的大小成反比   HIVE：存储 查询和分析存储在hdfs上的大量数据
+缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传 速度很慢
+ZOOkeeper“zn&#43;1哥服务器允许n此错误。
+结构化数据
+1  数据库这种有二维表格的   半结构化数据
+1  类似于一个文件，但是可以导入mysql这种结构化数据中   非结构化数据
+1  无法转化，视频，ppt等   Hadoop
+1 2  分布式系统基础架构：多台服务器共同完成某一任务 主要解决海量数据的存储和分析计算   三大发行版本
+1 2 3  Apache 最基础 Cloudera Horntownworks   Hadoop优势
+1 2 3 4  高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided 高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除 高效性：hadoop是并行工作的 高容错性：能够自动将失败任务重新分配   hadoop组成（important）'>
+<meta property='og:url' content='https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/'>
+<meta property='og:site_name' content='AllForOne&#39;s Site,Your genneration comes!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-02-16T00:42:52&#43;08:00'/><meta property='article:modified_time' content='2022-02-16T00:42:52&#43;08:00'/><meta property='og:image' content='https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/b2.jpg' />
+<meta name="twitter:title" content="Hadoop Learning">
+<meta name="twitter:description" content="[toc]
+Hadoop相关概念 BIg Data
+1 2 3 4  Volume Velocity（快速） Variety (结构化数据和非结构化数据) Value(低价值密度)：价值密度的大小与数据总量的大小成反比   HIVE：存储 查询和分析存储在hdfs上的大量数据
+缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传 速度很慢
+ZOOkeeper“zn&#43;1哥服务器允许n此错误。
+结构化数据
+1  数据库这种有二维表格的   半结构化数据
+1  类似于一个文件，但是可以导入mysql这种结构化数据中   非结构化数据
+1  无法转化，视频，ppt等   Hadoop
+1 2  分布式系统基础架构：多台服务器共同完成某一任务 主要解决海量数据的存储和分析计算   三大发行版本
+1 2 3  Apache 最基础 Cloudera Horntownworks   Hadoop优势
+1 2 3 4  高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided 高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除 高效性：hadoop是并行工作的 高容错性：能够自动将失败任务重新分配   hadoop组成（important）"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://yuxin-zh.github.io/AllForOne/p/hadoop-learning/b2.jpg' />
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/AllForOne" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/AllForOne/p/hadoop-learning/">
+                <img src="/AllForOne/p/hadoop-learning/b2_hu0d8ab1c30cfa3ec811729f914159dc22_220525_800x0_resize_q75_box.jpg"
+                        srcset="/AllForOne/p/hadoop-learning/b2_hu0d8ab1c30cfa3ec811729f914159dc22_220525_800x0_resize_q75_box.jpg 800w, /AllForOne/p/hadoop-learning/b2_hu0d8ab1c30cfa3ec811729f914159dc22_220525_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="464" 
+                        loading="lazy"
+                        alt="Featured image of post Hadoop Learning" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/AllForOne/p/hadoop-learning/">Hadoop Learning</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 16, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[toc]</p>
+<h1 id="hadoop相关概念">Hadoop相关概念</h1>
+<p>BIg Data</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">	Volume  
+	Velocity（快速） 
+	Variety (结构化数据和非结构化数据)
+	Value(低价值密度)：价值密度的大小与数据总量的大小成反比
+</code></pre></td></tr></table>
+</div>
+</div><p>HIVE：存储 查询和分析存储在hdfs上的大量数据</p>
+<p>缺点 ：不支持事务，不可以修改数据，只可以通过文件追加和重新上传  速度很慢</p>
+<p>ZOOkeeper“zn+1哥服务器允许n此错误。</p>
+<p>结构化数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">数据库这种有二维表格的
+</code></pre></td></tr></table>
+</div>
+</div><p>半结构化数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">类似于一个文件，但是可以导入mysql这种结构化数据中
+</code></pre></td></tr></table>
+</div>
+</div><p>非结构化数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">无法转化，视频，ppt等
+</code></pre></td></tr></table>
+</div>
+</div><p>Hadoop</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">分布式系统基础架构：多台服务器共同完成某一任务
+主要解决海量数据的存储和分析计算
+</code></pre></td></tr></table>
+</div>
+</div><p>三大发行版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Apache 最基础
+Cloudera   Horntownworks
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Hadoop优势</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">高可靠性：底层维护多个数据副本，即使某个元素或存储出现故障，data-loss is avoided
+高扩展性：在集群间分配任务数据，可方便扩展节点，动态增加和动态删除
+高效性：hadoop是并行工作的
+高容错性：能够自动将失败任务重新分配
+</code></pre></td></tr></table>
+</div>
+</div><p>hadoop组成（important）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Hadoop 1.x:
+	HDFS:数据存储   
+	Mapduce：计算+资源调度
+	Common：辅助工具
+Hadoop 2.x:
+	多了Yarn用于资源调度
+Hadoop 3.x：
+	在组成上没有区别
+</code></pre></td></tr></table>
+</div>
+</div><p>HDFS数据存储</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">NameNode:存储文件的元数据，如文件名，文件目录结构，文件属性等 保存在linux中
+DataNode：存储文件块数据，以及快数据的校验和{
+	文件块：最基本的存储单位
+	HDFS默认的block大小是64MB（老版本)
+	不同于普通文件系统的是，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间
+	Replication：多复本  默认是三个，可通过配置文件配置
+}
+2NN:每隔一段时间对NameNode元数据备份,只能恢复一部分数据而非所有
+</code></pre></td></tr></table>
+</div>
+</div><p>关于replication的解析：<!-- raw HTML omitted --></p>
+<p>Yarn架构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Resource Manager:管理整个集群资源  rm将资源部份安排给基础大的Node Manager
+<span class="o">{</span>
+	*NM遵循来自RM的一些指令来管理单一节点上的可用资源
+	*AM负责与RM协商资源并于NM合作启动容器
+<span class="o">}</span>
+Node Manager:管理单个节点的服务器资源  是yarn中每个节点上的代理  与RM通讯 监督container的生命周期
+ApplicationMaster：单个运行任务的boss 流程如下
+	和rm协商，获取资源 通过rm来获取任务 和NM启动任务 Map或Reduce
+---------------	
+Container：容器，相当于于一台独立服务器，封装任务运行需要的资源  封装的是某个DataNode节点上的资源
+AppMaster请求资源时，RM以container的形式返回资源
+
+Scheduler:资源调度器根据队列容量，队列限制，为每个应用分配一定的资源。（只是单纯的资源调度，不参与任何任务状态管理）
+</code></pre></td></tr></table>
+</div>
+</div><p>MapReduce架构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">计算分为两个阶段：Map 和Reduce
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/AllForOne/p/hadoop-learning/1.png"
+	width="2340"
+	height="1080"
+	srcset="/AllForOne/p/hadoop-learning/1_hu6d73c86b86e7571b9382801cf6222d7f_493148_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/1_hu6d73c86b86e7571b9382801cf6222d7f_493148_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20210913180309582"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="216"
+		data-flex-basis="520px"
+	
+></p>
+<p>HDFS&amp;Yarn&amp;MapReduce</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">remain to be <span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Hadoop运行模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Local:数据存储再linux本地，从本地读取  ~测试偶尔会用
+伪分布式（pseudo-distributed）：数据存储在HDFS ~公司比较差钱
+完全分布式（fully-distributed）:数据也是存储在HDFS，但是多台服务器工作 ~大量使用
+</code></pre></td></tr></table>
+</div>
+</div><p>tip</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">后续写的mapreduce程序必须指定对应的输入路径和输出路径，而且输出路径还不能存在，存在的话会直接抛出异常。 Get it!
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Hadoop官方文档：</strong><a class="link" href="https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html"  target="_blank" rel="noopener"
+    >FileSystem (Apache Hadoop Main 3.3.1 API)</a></p>
+<h1 id="hdfs">HDFS</h1>
+<h2 id="introduction">Introduction</h2>
+<p>分布式文件系统，建立在一次写入，多次读取的思想上。</p>
+<p><strong>一个hdfs集群是由一个namenode和多个datanode形成</strong>，内部机制是将一个文件分割成一个或多个的block，这些块储存在一组数据节点中。</p>
+<p><strong>namenode负责文件或目录的“打开，关闭，重命名等”,并确定块与数据节点的映射。而数据节点负责来自文件系统客户的读写请求</strong></p>
+<h2 id="hdfs-块">HDFS 块</h2>
+<ul>
+<li>默认的最基本的存储单位是64M的数据块**（默认大小在hadoop2.x版本中是128M，老版本中是64M）**</li>
+<li>HDFS的文件是被分成64M一块的数据块进行存储的</li>
+<li>HDFS中若一个文件大小小于64M，并不占用整个存储空间</li>
+</ul>
+<h3 id="1hadoop-block存放策略">1）hadoop block存放策略</h3>
+<ul>
+<li>第一个block放在client所在的node里面</li>
+<li>第二个放在与第一个不同的机架中的node中</li>
+<li>第三个放在与第一个块的同一个机架的不用node中</li>
+</ul>
+<h3 id="2namenode和datanode">2）NameNode和DataNode</h3>
+<ul>
+<li>NameNode(元数据节点)：用来管理文件系统的命名空间
+<ul>
+<li>将所有文件和文件夹的元数据保存在一个system tree上（ 元数据 ：指用来描述一个 文件 的特征的系统数据，诸如访问权限、 文件 拥有者、以及 文件 数据块的分布信息等等）</li>
+<li>也同时会在硬盘上保存成这些文件：namespace image 和editlog</li>
+<li>也存储了一个文件包含哪些数据块，分布在哪些数据节点上</li>
+<li><strong>注意：这些信息并不真正存储在硬盘 而是存放在数据节点中</strong></li>
+<li>client和namenode可以向数据节点请求写入或者读出数据块，并周期性的向namenode汇报其存储的数据块信息</li>
+<li><strong>元数据节点目录结构：在hdfs-site.xml中配置dfs.name.dir参数</strong><!-- raw HTML omitted --></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">namespaceID</span><span class="o">=</span><span class="m">123214214</span> 文件系统的唯一标识符 在文件系统初始化时生成的
+<span class="nv">ClusterID</span><span class="o">=</span>xxxxxxxxx   系统生成或手动指定的集群ID，可以在-clusteid选项中使用
+<span class="nv">cTime</span><span class="o">=</span><span class="m">0</span>               0此处标识namenode的创建时间，更新nd后会更新时间戳
+<span class="nv">storageType</span><span class="o">=</span>NAME_NODE 表示此文件夹中保存的是元数据节点的数据结构
+LayoutVersion 		  保存格式版本号
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/AllForOne/p/hadoop-learning/2.png"
+	width="1386"
+	height="736"
+	srcset="/AllForOne/p/hadoop-learning/2_hu115e04f43b127b90fd44e1735f6f134b_265774_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/2_hu115e04f43b127b90fd44e1735f6f134b_265774_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211127201044656"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="451px"
+	
+></p>
+<p><strong>checkpoint的作用：1）保证数据库的一致性，这是指将脏数据写入到硬盘，保证内存和硬盘上的数据是一样的;2）缩短实例恢复的时间</strong></p>
+<h3 id="3hdfs通信协议">3）HDFS通信协议</h3>
+<p><img src="/AllForOne/p/hadoop-learning/3.png"
+	width="1350"
+	height="296"
+	srcset="/AllForOne/p/hadoop-learning/3_hu5fd8fe86c85adec8a205f1774f8e7cc2_246538_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/3_hu5fd8fe86c85adec8a205f1774f8e7cc2_246538_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211127211253785"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="456"
+		data-flex-basis="1094px"
+	
+></p>
+<h3 id="4hdfs的安全模式">4）HDFS的安全模式</h3>
+<p><img src="/AllForOne/p/hadoop-learning/4.png"
+	width="1342"
+	height="273"
+	srcset="/AllForOne/p/hadoop-learning/4_huc649dcf599d37fd25fc28a9ab18450dd_290897_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/4_huc649dcf599d37fd25fc28a9ab18450dd_290897_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211127211332872"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="491"
+		data-flex-basis="1179px"
+	
+></p>
+<h3 id="5客户端读文件">5）客户端读文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">//工具类获取FileSystem
+</span><span class="c1"></span> <span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">&#34;域名&#34;</span><span class="o">;</span> <span class="c1">//like &#34;hdfs://niit1:9000&#34;
+</span><span class="c1"></span>        <span class="n">Configuration</span> <span class="n">conf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Configuration</span><span class="o">();</span>
+        <span class="n">FileSystem</span> <span class="n">fs</span><span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">URI</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">uri</span><span class="o">),</span><span class="n">conf</span><span class="o">,</span><span class="s">&#34;你的用户名,也可以不加，区别建议查阅官方API&#34;</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">&#34;hdfs://niit1:9000&#34;</span><span class="o">;</span>
+        <span class="n">Configuration</span> <span class="n">conf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Configuration</span><span class="o">();</span>
+        <span class="n">FileSystem</span> <span class="n">fs</span><span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">URI</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">uri</span><span class="o">),</span><span class="n">conf</span><span class="o">);</span>
+
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">file_content_buff</span> <span class="o">=</span> <span class="s">&#34;hello hadoop world,test write file! \n&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span><span class="c1">//以字节数组的形式读取字符串
+</span><span class="c1"></span>        <span class="n">Path</span> <span class="n">dfs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;/user/root/niit/nn.txt&#34;</span><span class="o">);</span> <span class="c1">//写入文件路径
+</span><span class="c1"></span>        <span class="n">FSDataOutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">dfs</span><span class="o">);</span>
+        <span class="c1">//create file两种形式 1）使用setpermission提供的权限来设置权限 2）将配置中的umask改为0---&gt;但并非线程安全的
+</span><span class="c1"></span>        <span class="n">outputStream</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">file_content_buff</span><span class="o">,</span><span class="n">0</span><span class="o">,</span><span class="n">file_content_buff</span><span class="o">.</span><span class="na">length</span><span class="o">);</span><span class="c1">//写入文件
+</span><span class="c1"></span>        <span class="n">fs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th><code>static FileSystem</code></th>
+<th><code>get(URI uri, Configuration conf)</code>Get a FileSystem for this URI&rsquo;s scheme and authority.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>static FileSystem</code></td>
+<td><code>get(URI uri, Configuration conf, String user)</code>Get a FileSystem instance based on the uri, the passed in configuration and the user.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="6客户端写文件">6）客户端写文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">  <span class="n">FileSystem</span> <span class="n">fs</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">GetFileSystem</span><span class="o">()).</span><span class="na">getSystem</span><span class="o">();</span> <span class="c1">//GetFileSystem是上面的工具类 用来获取FileSystem
+</span><span class="c1"></span>        <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//Opens an FSDataInputStream at the indicated Path.
+</span><span class="c1"></span>            <span class="n">in</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;/user/root/niit/nn1.txt&#34;</span><span class="o">));</span>
+            <span class="n">IOUtils</span><span class="o">.</span><span class="na">copyBytes</span><span class="o">(</span><span class="n">in</span><span class="o">,</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">,</span><span class="n">4096</span><span class="o">,</span><span class="kc">false</span><span class="o">);</span>
+            <span class="c1">//(InputStream in, OutputStream out, int buffSize, boolean close)
+</span><span class="c1"></span>        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeStream</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+        <span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="7本地文件上传到hdfs">7）本地文件上传到HDFS</h3>
+<p>使用 <strong>copyFromLocalFile</strong>接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">FileSystem</span> <span class="n">fs</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">GetFileSystem</span><span class="o">()).</span><span class="na">getSystem</span><span class="o">();</span>
+        <span class="n">Path</span> <span class="n">src</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;本地文件路径&#34;</span><span class="o">);</span>
+        <span class="n">Path</span> <span class="n">desc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;目标路径&#34;</span><span class="o">);</span>
+        <span class="n">fs</span><span class="o">.</span><span class="na">copyFromLocalFile</span><span class="o">(</span><span class="n">src</span><span class="o">,</span><span class="n">desc</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="8重命名文件">8）重命名文件</h3>
+<p>使用rename（抽象类）返回布尔值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"> <span class="n">FileSystem</span> <span class="n">fs</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">GetFileSystem</span><span class="o">()).</span><span class="na">getSystem</span><span class="o">();</span>
+        <span class="c1">//已经在classpath下面加载了hdfs-site.xml和core-site.xml的配置文件，则会自动理解输入的文件路径为hdfs的
+</span><span class="c1"></span>        <span class="n">Path</span> <span class="n">CurrentName</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;当前文件路径及文件名&#34;</span><span class="o">);</span>
+        <span class="n">Path</span> <span class="n">desName</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;目标文件名&#34;</span><span class="o">);</span>  <span class="c1">//是否可以同时修改文件路径?YESSSSSSS!!!!
+</span><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="na">rename</span><span class="o">(</span><span class="n">CurrentName</span><span class="o">,</span><span class="n">desName</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">==</span><span class="kc">true</span><span class="o">?</span><span class="s">&#34;修改成功&#34;</span><span class="o">:</span><span class="s">&#34;修改失败&#34;</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="9delete-file--directory">9）Delete File &amp; Directory</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">FileSystem</span> <span class="n">fs</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">GetFileSystem</span><span class="o">()).</span><span class="na">getSystem</span><span class="o">();</span>
+        <span class="n">Path</span> <span class="n">delef</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;删除的目标地址&#34;</span><span class="o">);</span>
+        <span class="kt">boolean</span> <span class="n">deleRe</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">delef</span><span class="o">,</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">deleRe</span><span class="o">==</span><span class="kc">true</span><span class="o">?</span> <span class="s">&#34;yes&#34;</span><span class="o">:</span><span class="s">&#34;no&#34;</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="10创建目录和遍历目录">10）创建目录和遍历目录</h3>
+<p><strong>创建过程和删除相似  无非是使用了mkdirs接口罢了</strong></p>
+<p>遍历目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">FileSystem</span> <span class="n">fs</span> <span class="o">=</span> <span class="o">(</span><span class="k">new</span> <span class="n">GetFileSystem</span><span class="o">()).</span><span class="na">getSystem</span><span class="o">();</span>
+        <span class="n">FileStatus</span><span class="o">[]</span> <span class="n">fsstatus</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="na">listStatus</span><span class="o">(</span><span class="k">new</span> <span class="n">Path</span><span class="o">(</span><span class="s">&#34;/user/root&#34;</span><span class="o">));</span>
+        <span class="k">for</span><span class="o">(</span><span class="n">FileStatus</span> <span class="n">status</span> <span class="o">:</span> <span class="n">fsstatus</span><span class="o">)</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">status</span><span class="o">.</span><span class="na">isFile</span><span class="o">())</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;file:&#34;</span><span class="o">+</span><span class="n">status</span><span class="o">.</span><span class="na">getPath</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+            <span class="k">else</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;directory:&#34;</span><span class="o">+</span><span class="n">status</span><span class="o">.</span><span class="na">getPath</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th><code>abstract FileStatus[]</code></th>
+<th><code>listStatus(Path f)</code>List the statuses of the files/directories in the given path if the path is a directory.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FileStatus[]</code></td>
+<td><code>listStatus(Path[] files)</code>Filter files/directories in the given list of paths using default path filter.</td>
+</tr>
+<tr>
+<td><code>FileStatus[]</code></td>
+<td><code>listStatus(Path[] files, PathFilter filter)</code>Filter files/directories in the given list of paths using user-supplied path filter.</td>
+</tr>
+<tr>
+<td><code>FileStatus[]</code></td>
+<td><code>listStatus(Path f, PathFilter filter)</code>Filter files/directories in the given path using the user-supplied path filter.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="hadoopshell-commands">HadoopShell Commands</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">阿巴阿巴</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="hadoop-io">Hadoop IO</h1>
+<h2 id="1序列化">1）序列化</h2>
+<p>序列化：<strong>将结构化对象转化为字节流以便于通过网络进行传输或写入持久存储的过程 反序列化则反之</strong></p>
+<ul>
+<li>
+<p>特点：</p>
+<ul>
+<li>
+<p>Compact: 方便网络传输</p>
+</li>
+<li>
+<p>Fast：性能好</p>
+</li>
+<li>
+<p>Extensible：协议有变化 可以支持新的需求（动态）</p>
+</li>
+<li>
+<p>Interoperable：客户端和服务器端不依赖语言的实现（怎么去理解）</p>
+</li>
+<li>
+<p>hadoop使用writables，满足compact fast 但是不满足拓展性 （这种序列化时hadoop自己实现的，而不是java的序列化）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Serialization</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span> 
+ <span class="c1">//客户端用于判断序列化实现是否支持该类对象 
+</span><span class="c1"></span> <span class="kt">boolean</span> <span class="nf">accept</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">);</span> 
+<span class="c1">//获得用于序列化对象的 Serializer 实现 
+</span><span class="c1"></span> <span class="n">Serializer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">getSerializer</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span> 
+<span class="c1">//获得用于反序列化对象的 Deserializer 实现 
+</span><span class="c1"></span> <span class="n">Deserializer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">getDeserializer</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">);</span> 
+<span class="o">}</span> 
+
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h2 id="2序列化流程">2）序列化流程</h2>
+<ul>
+<li>如果需要**使用 Serializer **来执行序列化，一般需要通过 <strong>open()<strong>方法打开 Serializer，open()方法传入一个 底层的流对象，然后就可以使用</strong>serialize()方法序列化对象</strong>到底层的流中。最后序列化结束时，通过 close()方法关闭 Serializer。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Serializer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span> 
+ <span class="c1">//为输出（序列化）对象做准备 
+</span><span class="c1"></span> <span class="kt">void</span> <span class="nf">open</span><span class="o">(</span><span class="n">OutputStream</span> <span class="n">out</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span> 
+ 
+<span class="c1">//将对象序列化到底层的流中 
+</span><span class="c1"></span> <span class="kt">void</span> <span class="nf">serialize</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span> 
+ 
+<span class="c1">//序列化结束，清理 
+</span><span class="c1"></span> <span class="kt">void</span> <span class="nf">close</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span> 
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3反序列化">3）反序列化</h2>
+<ul>
+<li>
+<p>如果要使用 <strong>deserializer</strong> 来执行反序列化，一般需要通过 open()方法打开 deserializer，open()方法传入 一个底层的流对象，然后就可以使用 deserializer()方法反序列化流到对象中。最后反序列化结束时， 通过 close()方法关闭 Serializer。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">deserializer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kt">void</span> <span class="nf">open</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">in</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span> 
+<span class="n">T</span> <span class="nf">deserialize</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span>
+<span class="kt">void</span> <span class="nf">close</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">;</span>
+<span class="o">}</span> 
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="4writable接口">4）Writable接口</h2>
+<ul>
+<li><strong>Hadoop 的所有可序列化对象都必须实现 这个接口。Writable 接口里有两个方法，一个是 write 方法，将对象写入字节流，另一个是 readFields 方法，从字节流解析出对象</strong>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">IntWritable</span> <span class="n">intWritable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntWritable</span><span class="o">(</span><span class="n">12</span><span class="o">);</span>
+        <span class="c1">//生成流对象
+</span><span class="c1"></span>        <span class="n">ByteArrayOutputStream</span> <span class="n">byteArrayOutputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+        <span class="n">DataOutputStream</span> <span class="n">dataOutputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">);</span>
+        <span class="c1">//DataStream封装byteStream
+</span><span class="c1"></span>
+        <span class="c1">//Serilization the data  序列化对象到流中
+</span><span class="c1"></span>        <span class="n">intWritable</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">dataOutputStream</span><span class="o">);</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">byteArray</span> <span class="o">=</span> <span class="n">byteArrayOutputStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+        <span class="n">dataOutputStream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">byteArray</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">byteArray</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">deserialize</span><span class="o">(</span><span class="kt">byte</span> <span class="o">[]</span> <span class="n">barr</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">IntWritable</span> <span class="n">intWritable</span><span class="o">=</span><span class="k">new</span> <span class="n">IntWritable</span><span class="o">();</span>
+        <span class="n">ByteArrayInputStream</span> <span class="n">byteArrayinputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">barr</span><span class="o">);</span>
+        <span class="n">DataInputStream</span> <span class="n">dataInputStream</span><span class="o">=</span> <span class="k">new</span> <span class="n">DataInputStream</span><span class="o">(</span><span class="n">byteArrayinputStream</span><span class="o">);</span>
+        <span class="n">intWritable</span><span class="o">.</span><span class="na">readFields</span><span class="o">(</span><span class="n">dataInputStream</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">data</span><span class="o">=</span><span class="n">intWritable</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+        
+        <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
+
+        <span class="c1">//writable必不可少
+</span><span class="c1"></span>    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/AllForOne/p/hadoop-learning/5.png"
+	width="1466"
+	height="696"
+	srcset="/AllForOne/p/hadoop-learning/5_hudc5020dc62f5b8fce39e63326cca4045_188636_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/5_hudc5020dc62f5b8fce39e63326cca4045_188636_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211128155901456"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="210"
+		data-flex-basis="505px"
+	
+></p>
+<h2 id="5writablecomparable">5）WritableComparable</h2>
+<ul>
+<li><strong>WritableComparable 接口是可序列化并且可比较的接口，MapReduce 中所有的 key 值类型都必须实现 这个接口。</strong></li>
+</ul>
+<h2 id="6压缩smile">6）压缩:smile:</h2>
+<ul>
+<li>GZIP:
+<ul>
+<li>压缩率较高，速度较快，hadoop本身就支持，使用方便，支持 hadoop native 库</li>
+<li>不支持split</li>
+<li>当每个文件压缩之后在 130M 以内的（1 个块大小内），都可以考虑用 gzip 压缩格式</li>
+</ul>
+</li>
+<li>LZO：
+<ul>
+<li>压缩速度很快，压缩率合理，支持split，hadoop最流行的压缩格式</li>
+<li>压缩率比gzip低，hadoop本身并不支持，需要安装</li>
+<li>应用场景：一个很大的文本文件，压缩之后还大于 200M 以上的可以考虑，而且单个文件越大，lzo 优点越越明显。</li>
+</ul>
+</li>
+<li>Snappy:
+<ul>
+<li>高速压缩速度和合理的压缩率；支持 hadoop native 库</li>
+<li>不支持 split；压缩率比 gzip 要低；hadoop 本身不支持，需要安装；linux 系统下没有对应 的命令。</li>
+<li>应用场景：mapreduce中map输出的数据较大，可作为map到reduce的中间数据的压缩格式</li>
+</ul>
+</li>
+<li>bzip2
+<ul>
+<li>支持 split；具有很高的压缩率，比 gzip 压缩率都高；hadoop 本身支持，但不支持 native</li>
+<li>压缩/解压速度慢；不支持 native。</li>
+<li>适合对速度要求不高，但需要较高的压缩率的时候，可以作为 mapreduce 作业的输出格 式；或者输出之后的数据比较大，处理之后的数据需要压缩存档减少磁盘空间并且以后数据用得比 较少的情况；或者对单个很大的文本文件想压缩减少存储空间，同时又需要支持 split，而且兼容之 前的应用程序（即应用程序不需要修改）的情况。</li>
+</ul>
+</li>
+<li><strong>CompressionCodec 对流进行压缩和解压缩</strong></li>
+<li>每一种编码器(Compressor)/解码器(Decompressor)最后统一的交由编码解码器(CompressionCodec) 来管理</li>
+<li><img src="/AllForOne/p/hadoop-learning/13.png"
+	width="1486"
+	height="510"
+	srcset="/AllForOne/p/hadoop-learning/13_hu980d255d7092880c05cc42fe4286f944_88295_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/13_hu980d255d7092880c05cc42fe4286f944_88295_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211128162410728"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="291"
+		data-flex-basis="699px"
+	
+></li>
+</ul>
+<hr>
+<h3 id="暂时没搞明白-实现原理sob">暂时没搞明白 实现原理。:sob:</h3>
+<h2 id="7特殊文件处理-cry">7）特殊文件处理 :cry:</h2>
+<ul>
+<li>需求：在处理小文件上低效率和小号磁盘空间的问题</li>
+<li>SOlUTION:使用容器：SequenceFile  MapFile</li>
+</ul>
+<p>SequenceFile：一种二进制文件支持，直接将&lt;key,value&gt;对序列化到文件中。</p>
+<ul>
+<li>支持压缩，定制基于record或block压缩</li>
+<li>简单</li>
+</ul>
+<p>在SequenceFile文件中，每一个KV被看作一条记录，所以基于Record的压🔒策略，可以支持三种压缩类型：</p>
+<ul>
+<li>None：对record不压缩</li>
+<li>RECORD:仅仅压缩每一个record中的value</li>
+<li>BLOCK:将一个block中所有records压缩</li>
+</ul>
+<p><strong>创建SequenceFile</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Remains</span> <span class="n">to</span> <span class="n">be</span> <span class="n">done</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="rpc协议">RPC协议</h1>
+<h2 id="1定义">1）定义</h2>
+<p>远程方法调用，允许计算机程序远程调用另一台计算机的子程序。</p>
+<h2 id="2feature">2）Feature</h2>
+<ul>
+<li>透明性：远程调用其他机器上的程序，对用户来说就像是调用本地方法一样；</li>
+<li>高性能：RPC server 能够并发处理多个来自 Client 的请求</li>
+</ul>
+<h2 id="3cs-模式">3）C/S 模式</h2>
+<ul>
+<li>Client 端发送一个带有参数的请求信息到 Server</li>
+<li>Server 接收到这个请求以后，根据发送过来的参数调用相应的程序，然后把自己计算好的结果 发送给 Client 端；</li>
+<li>Client 端接收到结果后继续运行</li>
+</ul>
+<h1 id="hadoop-prc机制">Hadoop prc机制</h1>
+<h4 id="1rpc设计要求">1.RPC设计要求</h4>
+<ul>
+<li>序列化层：C与S端通信采用了hadoop的序列化类或自定Writable类型</li>
+<li>函数调用层：Hadoop RPC通过动态代理以及java反射实现函数调用</li>
+<li>网络传输层：采用了基于TCP/IP的socket机制</li>
+<li>服务器端框架层：知识盲区</li>
+</ul>
+<h2 id="核心框架原理">核心框架原理</h2>
+<ul>
+<li>优点：易于编程，只用关系业务逻辑
+<ul>
+<li>良好拓展性：可以动态增加服务器，解决计算资源不够的问题</li>
+<li>高容错性：任何一台机器挂掉，可以将任务转移到其他节点</li>
+<li>适合海量数据的计算（TB/PB) 几千台服务器共同计算</li>
+</ul>
+</li>
+<li>不擅长实时计算（mysql这样的擅长）</li>
+<li>不擅长流式计算（Sparkstreaming flink）</li>
+<li>不擅长DAG有向无环图计算 spark</li>
+</ul>
+<h4 id="1mapreduce阶段引用图">1）MapReduce阶段（引用图）</h4>
+<p><img src="/AllForOne/p/hadoop-learning/6.png"
+	width="2153"
+	height="1010"
+	srcset="/AllForOne/p/hadoop-learning/6_hua0e78e1b96a3ff33a6cc2c0fa0ae5a54_1224715_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/6_hua0e78e1b96a3ff33a6cc2c0fa0ae5a54_1224715_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211201231712166"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="213"
+		data-flex-basis="511px"
+	
+></p>
+<h4 id="2mapreduce进程">2）MapReduce进程</h4>
+<p>一个完整的MapReduce程序在分布式运行时有三类实例进程</p>
+<ul>
+<li>MrAppMaster:负责整个程序的过程调度和状态调度</li>
+<li>MapTask：负责整个Map阶段的整个数据处理流程</li>
+<li>ReduceTask：负责整个Reduce阶段的整个数据处理流程</li>
+</ul>
+<h4 id="3mapreduce的编程规范">3）MapReduce的编程规范</h4>
+<ul>
+<li>
+<p>Map阶段</p>
+<ul>
+<li>用户自定义的Mapper需要继承自己的父类</li>
+<li>Mapper的输入数据是KV对的形式（类型可以自定义）</li>
+<li>Mapper中的业务逻辑实现在map方法中</li>
+<li>Map的输出数据也是KV对的形式（同样可以自定义类型）</li>
+<li>Map方法对每一个&lt;K,V&gt;调用一次（一行一行的调用，多次使用map）</li>
+</ul>
+</li>
+<li>
+<p>Reduce阶段</p>
+<ul>
+<li>继承父类</li>
+<li>reducer的输入数据类型对应mapper的输出类型</li>
+<li>Reducer的业务逻辑写在reduce阶段</li>
+<li>ReduceTask进程对每一组k的&lt;k,v&gt;带哦用一次reduce方法（多少K就进行多少次reduce）</li>
+<li><img src="/AllForOne/p/hadoop-learning/7.png"
+	width="778"
+	height="172"
+	srcset="/AllForOne/p/hadoop-learning/7_hu78810db735cea7fd66e93f5923ba4cfc_76244_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/7_hu78810db735cea7fd66e93f5923ba4cfc_76244_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211201232720654"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="452"
+		data-flex-basis="1085px"
+	
+></li>
+</ul>
+</li>
+<li>
+<p>Driver：相当于Yarn集群的客户端，用于提交我们整个正序到YARN集群，提交的是封装了MapReduce程序相关运行参数的job对象</p>
+</li>
+</ul>
+<h1 id="mapreduce">MapReduce</h1>
+<p><img src="/AllForOne/p/hadoop-learning/8.png"
+	width="2160"
+	height="1223"
+	srcset="/AllForOne/p/hadoop-learning/8_hu6e9e7ea6ee5c879249308f764aa7d097_909064_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/8_hu6e9e7ea6ee5c879249308f764aa7d097_909064_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211204203926980"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="176"
+		data-flex-basis="423px"
+	
+></p>
+<p><img src="/AllForOne/p/hadoop-learning/9.png"
+	width="2160"
+	height="1263"
+	srcset="/AllForOne/p/hadoop-learning/9_hub0c5cc7827b5d53d3084d1c1b5daed45_707427_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/9_hub0c5cc7827b5d53d3084d1c1b5daed45_707427_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211204204034482"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="410px"
+	
+></p>
+<h3 id="1输入的数据inputformat数据输入">1.输入的数据InputFormat数据输入</h3>
+<p><strong>Map切片大小设置为block大小时，效率最高</strong></p>
+<ul>
+<li>1）一个job的Map阶段并行度由客户端在提交Job时的切片数决定（切了多少片，多少个Maptask  <strong>注意每一个文件需要单独切</strong>）</li>
+<li>2）每一个Split切片分配一个MapTask并行实例处理</li>
+<li>3）默认情况，切片大小=BlockSize</li>
+<li>4）切片时不考虑数据集整体，而是逐个针对每一个文件单独切片</li>
+</ul>
+<p>Job提交流程源码分析</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">waitForCompletion</span><span class="o">()</span>
+   <span class="n">submit</span><span class="o">();</span>
+<span class="c1">//1 建立连接
+</span><span class="c1"></span>	<span class="n">connect</span><span class="o">();</span>
+		<span class="c1">//1)创建提交Job的代理
+</span><span class="c1"></span>		<span class="k">new</span> <span class="n">Cluster</span><span class="o">(</span><span class="n">getConfiguration</span><span class="o">());</span>
+			<span class="c1">//(1) 判断是本地运行环境还是yarn运行环境
+</span><span class="c1"></span>			<span class="n">initialize</span><span class="o">(</span><span class="n">jobTrackAddr</span><span class="o">,</span><span class="n">conf</span><span class="o">);</span>
+<span class="c1">//2 提交Job
+</span><span class="c1"></span>	<span class="n">submitter</span><span class="o">.</span><span class="na">submitJobInternal</span><span class="o">(</span><span class="n">Job</span><span class="o">.</span><span class="na">this</span><span class="o">,</span><span class="n">cluster</span><span class="o">)</span>
+        <span class="c1">// 1）创建给集群提交数据的Stag路径
+</span><span class="c1"></span>        <span class="n">Path</span> <span class="n">jobStagingArea</span> <span class="o">=</span> <span class="n">JobsubmissionFiles</span><span class="o">.</span><span class="na">getStagingDir</span><span class="o">(</span><span class="n">cluster</span><span class="o">,</span><span class="n">conf</span><span class="o">)</span>
+        <span class="c1">//2) 获取jobid 并创建job路径
+</span><span class="c1"></span>        <span class="n">JobID</span> <span class="n">jobId</span> <span class="o">=</span> <span class="n">submitClient</span><span class="o">.</span><span class="na">getNewJobID</span><span class="o">();</span>
+		<span class="c1">//3)如果是集群模式 拷贝jar包到集群
+</span><span class="c1"></span>		<span class="n">copyAndConfigureFiles</span><span class="o">(</span><span class="n">job</span><span class="o">,</span><span class="n">submitJobDir</span><span class="o">)</span>
+<span class="n">rUploader</span><span class="o">.</span><span class="na">uploadFiles</span><span class="o">(</span><span class="n">job</span><span class="o">,</span><span class="n">jobsubmitDir</span><span class="o">)</span>
+        <span class="c1">//4) 计算切片，生成切片规划文件
+</span><span class="c1"></span>        <span class="c1">//5) 向stag路径写XML配置文件
+</span><span class="c1"></span>        <span class="c1">//6) 提交JOB，返回提交状态
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/AllForOne/p/hadoop-learning/10.png"
+	width="2141"
+	height="1069"
+	srcset="/AllForOne/p/hadoop-learning/10_hu02af538ca6c78fb332c6b27485d26ead_650504_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/10_hu02af538ca6c78fb332c6b27485d26ead_650504_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211202001636660"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="200"
+		data-flex-basis="480px"
+	
+></p>
+<h5 id="afileinputformat切片源码解析">a.FileInputFormat切片源码解析</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">1</span><span class="o">)</span><span class="n">程序先找到数据存储的目录</span>
+<span class="n">2</span><span class="o">)</span><span class="n">遍历处理目录下的每一个文件</span>
+<span class="n">3</span><span class="o">)</span><span class="n">遍历第一个文件ss</span><span class="o">.</span><span class="na">txt</span>
+    <span class="n">a</span><span class="o">)</span><span class="n">获取文件大小fs</span><span class="o">.</span><span class="na">sizeOf</span><span class="o">(</span><span class="n">ss</span><span class="o">.</span><span class="na">ttx</span><span class="o">)</span>
+    <span class="n">b</span><span class="o">)</span><span class="n">计算切片大小</span>    <span class="nf">computeSplitSize</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">minSize</span><span class="o">,</span><span class="n">Math</span><span class="o">,</span><span class="n">min</span><span class="o">(</span><span class="n">maxSize</span><span class="o">,</span><span class="n">blockSize</span><span class="o">)))=</span><span class="n">blocksize</span><span class="o">=</span><span class="n">128M</span>
+	<span class="n">c</span><span class="o">)</span><span class="n">默认情况下切片大小都是blocksize</span>
+    <span class="n">d</span><span class="o">)</span><span class="n">开始切</span><span class="err">，</span><span class="n">形成第一个切片</span><span class="err">：</span><span class="n">ss</span><span class="o">.</span><span class="na">txt</span><span class="o">-</span><span class="n">0</span><span class="o">:</span><span class="n">128M</span> <span class="n">第二个切片ss</span><span class="o">.</span><span class="na">txt</span><span class="o">-</span><span class="n">128</span><span class="o">:</span><span class="n">256</span>
+    <span class="n">e</span><span class="o">)</span><span class="n">将切片信息写到一个切片规划文件中</span>
+    <span class="n">f</span><span class="o">)</span><span class="n">整个切片的核心过程再getSplit</span><span class="o">()</span><span class="n">方法完成</span>
+    <span class="n">g</span><span class="o">)</span><span class="n">InputSplit只记录了</span><span class="o">**</span><span class="n">切片的元数据信息</span><span class="o">**,</span><span class="n">比如起始位置</span><span class="err">、</span><span class="n">长度以及所在的节点列表</span>
+<span class="n">4</span><span class="o">)</span><span class="n">提交切片规划文件到YARN上</span><span class="err">，</span><span class="n">YARN上的MrAppMaster就可以根据切片规划文件计算开启MapTask的个数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>TextInputFormat是FileInputFormat的实现类 &lt;Longwritable,Text&gt;</p>
+<p>键是存储改行再整个文件中的起始字节偏移量，V是这行的内容</p>
+<hr>
+<p>KeyValueFormat &lt;Text , Text&gt;  第0位 KEY 后面是 Value</p>
+<h5 id="bcombinetextinputformat切片机制">b.CombineTextInputFormat切片机制</h5>
+<p>CombineTextInputFormat处理方式是一次读取多个文件，把所有文件集合再一起处理.</p>
+<p>应用场景：用于小文件过多的场景，因为再默认框架中</p>
+<p><img src="/AllForOne/p/hadoop-learning/11.png"
+	width="1265"
+	height="638"
+	srcset="/AllForOne/p/hadoop-learning/11_hu1b80369f3b0b4e2874d8678ab6c03f99_276696_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/11_hu1b80369f3b0b4e2874d8678ab6c03f99_276696_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211204194701843"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="475px"
+	
+></p>
+<h3 id="2shuffle">2.Shuffle</h3>
+<ul>
+<li>map方法之后。reduce方法之前的过程都成为Shuffle</li>
+<li><img src="/AllForOne/p/hadoop-learning/12.png"
+	width="2140"
+	height="1103"
+	srcset="/AllForOne/p/hadoop-learning/12_hua90695b097b4be83b2e61db8b2e47a35_825504_480x0_resize_box_3.png 480w, /AllForOne/p/hadoop-learning/12_hua90695b097b4be83b2e61db8b2e47a35_825504_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="image-20211204205758591"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="465px"
+	
+></li>
+</ul>
+<h4 id="apartitioner"><strong>a.Partitioner</strong></h4>
+<ul>
+<li>
+<p>注意：ReduceTask默认为1时，不会走默认的patitioner那个类，而是会运行那个一个内部类使得只有0这个分区</p>
+</li>
+<li>
+<p>问题：要求将统计结果按照条件输出到不同为你暗中（分区），归属地不同省份输出到不同文件中（分区）</p>
+</li>
+<li>
+<p>默认分区是根据key的hashcode对Reduce&rsquo;Task个数取模得到的。用户没法控制哪个Key存储到那个分区</p>
+</li>
+<li>
+<p>自定义Partitoner步骤</p>
+<ul>
+<li>
+<p>1）自定义类继承Partitioner，重写getPartitioner方法</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">www</span> <span class="kd">extends</span> <span class="n">Partitioner</span><span class="o">&lt;</span><span class="n">Text</span><span class="o">,</span><span class="n">FlowBean</span><span class="o">&gt;{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPartitioner</span><span class="o">(</span><span class="n">Text</span> <span class="n">key</span><span class="o">,</span><span class="n">FlowBean</span> <span class="n">value</span><span class="o">,</span><span class="kt">int</span> <span class="n">numpartitions</span><span class="o">)</span>
+        <span class="c1">//控制分区代码业务逻辑
+</span><span class="c1"></span>
+        <span class="o">........</span>
+        <span class="k">return</span> <span class="n">partition</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>2）在job驱动中，设置自定义Partioner</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">job</span><span class="o">.</span><span class="na">setPartitionerClass</span><span class="o">(</span><span class="n">CustomPartitioner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>3）自定义partitioner后，需要根据逻辑设置相应数量的ReduceTask</p>
+</li>
+<li>
+<p>4）如果reduceTask数量大于getPartitioner的结果数，则会产生几个空的</p>
+</li>
+<li>
+<p>5）如果reduceTask数量大于1 小于getPartitioner的结果数，则有一部分分区数据无法安防，报错</p>
+</li>
+<li>
+<p>如果reduceTask的数量为一，不管MapTask输出多少个分区的文件，结果都交由一个reduceTask，也就是产生一个结果文件。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="b全排序">b.全排序</h4>
+<p>FlowBean需要实现WritableComparable接口重写compareTo()方法</p>
+<h4 id="c二次排序">c.二次排序</h4>
+<h4 id="d区内排序">d.区内排序</h4>
+<h4 id="ecombiner">e.Combiner</h4>
+<p>会对Key相同的进行合并，并且在MapTask处理一部分合并会提高效率（注意：不是所有都适用）</p>
+<ul>
+<li>Combiner不属于Mapper和Reducer</li>
+<li>combiner组件的父类是Reducer</li>
+<li>Combiner和Reducer的区别在于运行的位置：前者在MapTask运行</li>
+<li>自定义：基于wordCount的案例  自定义Combiner</li>
+</ul>
+<h3 id="3输出数据outputformat">3.输出数据OutputFormat</h3>
+<ul>
+<li>核心方法：recordWriter决定写出类型</li>
+<li>自定义outputFormat：
+<ul>
+<li>过滤输出日志，包含atguigu的网站输出到&hellip;，不包含&hellip;.的输出到&hellip;.</li>
+<li>创建一个类LogRecordWriter继承RecordWriter
+<ul>
+<li>(a) 创建两个文件的输出流：aout，bout</li>
+<li>(b)符合a条件的输出到aout ，其他的输出到bout</li>
+<li>(c) 要将自定的输出格式组件设置到job中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4join">4.Join</h3>
+<h3 id="5-etl">5. ETL</h3>
+<h3 id="6总结">6.总结</h3>
+<h3 id="7yarn在mapreduce中的作用">7.Yarn在Mapreduce中的作用</h3>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 AllForOne&#39;s Site,Your genneration comes!
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#hdfs-块">HDFS 块</a>
+      <ol>
+        <li><a href="#1hadoop-block存放策略">1）hadoop block存放策略</a></li>
+        <li><a href="#2namenode和datanode">2）NameNode和DataNode</a></li>
+        <li><a href="#3hdfs通信协议">3）HDFS通信协议</a></li>
+        <li><a href="#4hdfs的安全模式">4）HDFS的安全模式</a></li>
+        <li><a href="#5客户端读文件">5）客户端读文件</a></li>
+        <li><a href="#6客户端写文件">6）客户端写文件</a></li>
+        <li><a href="#7本地文件上传到hdfs">7）本地文件上传到HDFS</a></li>
+        <li><a href="#8重命名文件">8）重命名文件</a></li>
+        <li><a href="#9delete-file--directory">9）Delete File &amp; Directory</a></li>
+        <li><a href="#10创建目录和遍历目录">10）创建目录和遍历目录</a></li>
+        <li><a href="#hadoopshell-commands">HadoopShell Commands</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1序列化">1）序列化</a></li>
+    <li><a href="#2序列化流程">2）序列化流程</a></li>
+    <li><a href="#3反序列化">3）反序列化</a></li>
+    <li><a href="#4writable接口">4）Writable接口</a></li>
+    <li><a href="#5writablecomparable">5）WritableComparable</a></li>
+    <li><a href="#6压缩smile">6）压缩:smile:</a>
+      <ol>
+        <li><a href="#暂时没搞明白-实现原理sob">暂时没搞明白 实现原理。:sob:</a></li>
+      </ol>
+    </li>
+    <li><a href="#7特殊文件处理-cry">7）特殊文件处理 :cry:</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1定义">1）定义</a></li>
+    <li><a href="#2feature">2）Feature</a></li>
+    <li><a href="#3cs-模式">3）C/S 模式</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#1rpc设计要求">1.RPC设计要求</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#核心框架原理">核心框架原理</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#1mapreduce阶段引用图">1）MapReduce阶段（引用图）</a></li>
+            <li><a href="#2mapreduce进程">2）MapReduce进程</a></li>
+            <li><a href="#3mapreduce的编程规范">3）MapReduce的编程规范</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1输入的数据inputformat数据输入">1.输入的数据InputFormat数据输入</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#2shuffle">2.Shuffle</a>
+          <ol>
+            <li><a href="#apartitioner"><strong>a.Partitioner</strong></a></li>
+            <li><a href="#b全排序">b.全排序</a></li>
+            <li><a href="#c二次排序">c.二次排序</a></li>
+            <li><a href="#d区内排序">d.区内排序</a></li>
+            <li><a href="#ecombiner">e.Combiner</a></li>
+          </ol>
+        </li>
+        <li><a href="#3输出数据outputformat">3.输出数据OutputFormat</a></li>
+        <li><a href="#4join">4.Join</a></li>
+        <li><a href="#5-etl">5. ETL</a></li>
+        <li><a href="#6总结">6.总结</a></li>
+        <li><a href="#7yarn在mapreduce中的作用">7.Yarn在Mapreduce中的作用</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/AllForOne/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
