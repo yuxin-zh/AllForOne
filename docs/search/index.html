@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'><title>404 Page not found</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=''><title>Search</title>
 
-<link rel='canonical' href='https://yuxin-zh.github.io/AllForOne/404.html'>
+<link rel='canonical' href='https://yuxin-zh.github.io/AllForOne/search/'>
 
-<link rel="stylesheet" href="/AllForOne/scss/style.min.6e28907171ccdc82609ab6675872e3dc961a1b00f252b4d0a9299bde606269c3.css"><meta property='og:title' content='404 Page not found'>
-<meta property='og:description' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'>
-<meta property='og:url' content='https://yuxin-zh.github.io/AllForOne/404.html'>
+<link rel="stylesheet" href="/AllForOne/scss/style.min.6e28907171ccdc82609ab6675872e3dc961a1b00f252b4d0a9299bde606269c3.css"><meta property='og:title' content='Search'>
+<meta property='og:description' content=''>
+<meta property='og:url' content='https://yuxin-zh.github.io/AllForOne/search/'>
 <meta property='og:site_name' content='Example Site'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2022-02-15T00:01:02&#43;08:00 '/>
-<meta name="twitter:title" content="404 Page not found">
-<meta name="twitter:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+<meta property='og:type' content='article'><meta property='article:section' content='Page' />
+<meta name="twitter:title" content="Search">
+<meta name="twitter:description" content=""><link rel="alternate" type="application/json" href="https://yuxin-zh.github.io/AllForOne/search/index.json"><link rel="preload" href="https://yuxin-zh.github.io/AllForOne/search/index.json" as="fetch" crossorigin="anonymous">
     </head>
-    <body class="">
+    <body class="template-search">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -175,7 +175,7 @@
         
         
 
-        <li >
+        <li  class='current' >
             <a href='/AllForOne/AllForOne/search/' >
                 
                 
@@ -238,11 +238,32 @@
     </ol>
 </aside>
 <main class="main full-width">
-    <div class="not-found-card">
-        <h1 class="article-title">Not Found</h1>
-        <h2 class="article-subtitle">This page does not exist</h2>
-    </div>
-    <footer class="site-footer">
+<form action="https://yuxin-zh.github.io/AllForOne/search/" class="search-form"data-json="https://yuxin-zh.github.io/AllForOne/search/index.json">
+    <p>
+        <label>Search</label>
+        <input name="keyword" placeholder="Type something..." />
+    </p>
+
+    <button title="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+    </button>
+</form>
+
+<h3 class="search-result--title section-title"></h3>
+<div class="search-result--list article-list--compact"></div>
+
+<script>
+    window.searchResultTitleTemplate = "#PAGES_COUNT pages (#TIME_SECONDS seconds)"
+</script><script type="text/javascript" src="/AllForOne/ts/search.js" defer></script>
+
+<footer class="site-footer">
     <section class="copyright">
         &copy; 
         

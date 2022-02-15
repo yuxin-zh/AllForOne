@@ -21,14 +21,14 @@ hasCJKLanguage: false
 
 permalinks:
     post: /p/:slug/
-    page: /:slug/
+    page: :slug/
 
 params:
     mainSections:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:
+    favicon:  #站点图标
 
     footer:
         since: 2020
@@ -39,16 +39,16 @@ params:
         lastUpdated: Jan 02, 2006 15:04 MST
 
     sidebar:
-        emoji: 🍥
+        emoji: 🍥  #头像底部的emoji
         subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        avatar:
-            enabled: true
-            local: true
-            src: img/avatar.png
+        avatar:    #博主头像
+            enabled: true    #是否显示
+            local: true      #是否在本地
+            src: img/avatar.png  #请把图片放在站点根目录的asset/img文件夹下。
 
     article:
         math: false
-        toc: true
+        toc: true   #是否启用目录
         readingTime: true
         license:
             enabled: true
@@ -139,12 +139,12 @@ params:
             - tag-cloud
 
         archives:
-            limit: 5
+            limit: 1
 
         tagCloud:
-            limit: 10
+            limit: 1
 
-    opengraph:
+    opengraph:  #标签默认工具
         twitter:
             # Your Twitter username
             site:
@@ -178,11 +178,11 @@ menu:
     main:
         - identifier: home
           name: Home
-          url: /
+          url: ./
           weight: -100
           params:
               ### For demonstration purpose, the home link will be open in a new tab
-              newTab: true
+              newTab: false
               icon: home
 
     social:
