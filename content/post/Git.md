@@ -357,6 +357,8 @@ When Typed "git log"
 - 在这种情况下，你就需要做一个把这行代码还原回来的提交：`revert`
 
   `git revert HEAD^`这行代码会增加一条新的提交，它的内容和倒数第二个`commit`是相反的，从而达到撤销的目的。⚠
+  
+  
 
 ## 12.CheckOut本质
 

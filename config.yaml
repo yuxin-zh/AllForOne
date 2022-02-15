@@ -3,7 +3,7 @@ publishDir: docs
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
-title: Example Site
+title: AllForOne's Site,Your genneration comes!
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -21,7 +21,7 @@ hasCJKLanguage: false
 
 permalinks:
     post: /p/:slug/
-    page: :slug/
+    page: /:slug/
 
 params:
     mainSections:
@@ -44,7 +44,7 @@ params:
         avatar:    #博主头像
             enabled: true    #是否显示
             local: true      #是否在本地
-            src: img/avatar.png  #请把图片放在站点根目录的asset/img文件夹下。
+            src: img/b1.jpg  #请把图片放在站点根目录的asset/img文件夹下。
 
     article:
         math: false
