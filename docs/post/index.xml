@@ -23,7 +23,7 @@
       
       <guid>https://yuxin-zh.github.io/AllForOne/p/linux/</guid>
       <description>[TOC]
-1.虚拟机安装  新建虚拟机，选择自定义    选择默认版，然后下一步
+LINUX安装与配置 1.虚拟机安装  新建虚拟机，选择自定义    选择默认版，然后下一步
   然后点击稍后安装操作系统
   选择centos 7 64位
   更改安装位置到你希望安装的位置

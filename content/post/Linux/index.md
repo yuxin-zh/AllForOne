@@ -7,7 +7,9 @@ image: b4.jpg
 
 [TOC]
 
-# 1.虚拟机安装
+# LINUX安装与配置
+
+## 1.虚拟机安装
 
 - 新建虚拟机，选择自定义
 
@@ -59,7 +61,7 @@ image: b4.jpg
 
   
 
-# 2.安装镜像
+## 2.安装镜像
 
 - 点击编辑虚拟机设置
 
@@ -150,7 +152,7 @@ image: b4.jpg
 
 - 查看ip地址`ifconfig`,这样你的虚拟机就安装完成了
 
-# 3.配置虚拟机网络适配器
+## 3.配置虚拟机网络适配器
 
 - 点击网络适配器
 
@@ -171,7 +173,7 @@ image: b4.jpg
 
 - 保存后输入`systemctl restart network`或`service network restart`
 
-# 4.配置DNS
+## 4.配置DNS
 
 - 一次输入以下命令：
 
@@ -190,3 +192,4 @@ image: b4.jpg
 - ping 172.16.50.171  外网
 
   
+

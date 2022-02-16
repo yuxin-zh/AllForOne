@@ -21,7 +21,8 @@
         
         <guid>https://yuxin-zh.github.io/AllForOne/p/linux/</guid>
         <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/linux/b4.jpg" alt="Featured image of post Linux" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&#34;1虚拟机安装&#34;&gt;1.虚拟机安装&lt;/h1&gt;
+&lt;h1 id=&#34;linux安装与配置&#34;&gt;LINUX安装与配置&lt;/h1&gt;
+&lt;h2 id=&#34;1虚拟机安装&#34;&gt;1.虚拟机安装&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;新建虚拟机，选择自定义&lt;/li&gt;
 &lt;/ul&gt;
@@ -228,7 +229,7 @@
 &gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;2安装镜像&#34;&gt;2.安装镜像&lt;/h1&gt;
+&lt;h2 id=&#34;2安装镜像&#34;&gt;2.安装镜像&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;点击编辑虚拟机设置&lt;/p&gt;
@@ -543,7 +544,7 @@
 &lt;p&gt;查看ip地址&lt;code&gt;ifconfig&lt;/code&gt;,这样你的虚拟机就安装完成了&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;3配置虚拟机网络适配器&#34;&gt;3.配置虚拟机网络适配器&lt;/h1&gt;
+&lt;h2 id=&#34;3配置虚拟机网络适配器&#34;&gt;3.配置虚拟机网络适配器&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;点击网络适配器&lt;/p&gt;
@@ -600,7 +601,7 @@
 &lt;p&gt;保存后输入&lt;code&gt;systemctl restart network&lt;/code&gt;或&lt;code&gt;service network restart&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;4配置dns&#34;&gt;4.配置DNS&lt;/h1&gt;
+&lt;h2 id=&#34;4配置dns&#34;&gt;4.配置DNS&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;一次输入以下命令：&lt;/p&gt;
