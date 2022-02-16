@@ -22,7 +22,26 @@
       <pubDate>Wed, 16 Feb 2022 00:54:24 +0800</pubDate>
       
       <guid>https://yuxin-zh.github.io/AllForOne/p/linux/</guid>
-      <description></description>
+      <description>[TOC]
+1.虚拟机安装  新建虚拟机，选择自定义    选择默认版，然后下一步
+  然后点击稍后安装操作系统
+  选择centos 7 64位
+  更改安装位置到你希望安装的位置
+  以下电脑配置高的可以选择配置多个处理器
+  虚拟机内存默认是1G，如果有需要可按需调配，这里配置4G
+  网络类型选择使用仅主机模式网络
+  SCSI控制器选择LSI Logic（默认）
+  磁盘选择创建新的
+  最大磁盘大小选择默认的20G
+  完成安装
+  2.安装镜像   点击编辑虚拟机设置
+  点击CD/DVD
+  点击使用ISO镜像文件，然后选择安装的cent的镜像
+  开启虚拟机，选择install centos 7 回车
+  安装结束后选择中文
+  点击软件选择
+  这里我们选择最小安装，你也可以根据自己的需要选择
+  然后是点击安装目标位置，直接 点击完成即可</description>
     </item>
     
     <item>
