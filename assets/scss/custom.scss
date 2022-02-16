@@ -1,1 +1,21 @@
 /* Place your custom SCSS in HUGO_SITE_FOLDER/assets/scss/custom.scss */
+:root {
+    // 行内代码背景色
+    --code-background-color: #f8f8f8;
+    // 行内代码前景色
+    --code-text-color: #e96900;
+}
+::selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
+  
+  ::-moz-selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
+  
+  ::-webkit-selection {
+    background: #dae3ea;
+    color: #34495e;
+  }
