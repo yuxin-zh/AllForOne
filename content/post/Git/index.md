@@ -1,5 +1,5 @@
 ---
-title: "Git学习路线"
+title: "Git"
 date: 2022-02-15T00:01:02+08:00
 draft: false
 image: b1.jpg

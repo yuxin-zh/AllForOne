@@ -2183,12 +2183,12 @@ LayoutVersion 		  保存格式版本号
 </description>
         </item>
         <item>
-        <title>Git学习路线</title>
-        <link>https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</link>
+        <title>Git</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/git/</link>
         <pubDate>Tue, 15 Feb 2022 00:01:02 +0800</pubDate>
         
-        <guid>https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</guid>
-        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/git%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/b1.jpg" alt="Featured image of post Git学习路线" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+        <guid>https://yuxin-zh.github.io/AllForOne/p/git/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/git/b1.jpg" alt="Featured image of post Git" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h1 id=&#34;git&#34;&gt;Git&lt;/h1&gt;
 &lt;h2 id=&#34;1版本控制系统vcs&#34;&gt;1.版本控制系统（VCS)&lt;/h2&gt;
 &lt;h3 id=&#34;11-基本概念----行内代码&#34;&gt;1.1 基本概念    &lt;code&gt;...&lt;/code&gt;行内代码&lt;/h3&gt;
