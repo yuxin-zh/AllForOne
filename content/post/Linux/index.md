@@ -166,7 +166,7 @@ image: b4.jpg
 
   ```bash
   然后修改BOOTPROTO=static
-  ONBOOY=yes
+  ONBOOT=yes
   加上DNS2=8.8.8.8
   然后按下ESC  输入":wq"  回车
   ```
