@@ -6,7 +6,15 @@
         <description>Recent content on AllForOne&#39;s Site,Your genneration comes!</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 23 Feb 2022 15:22:46 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 23 Feb 2022 15:24:22 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hive</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/hive/</link>
+        <pubDate>Wed, 23 Feb 2022 15:24:22 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/hive/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/hive/b2.webp" alt="Featured image of post Hive" /&gt;</description>
+        </item>
+        <item>
         <title>Zookeeper</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/zookeeper/</link>
         <pubDate>Wed, 23 Feb 2022 15:22:46 +0800</pubDate>
@@ -599,7 +607,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;然后修改BOOTPROTO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;static
-&lt;span class=&#34;nv&#34;&gt;ONBOOY&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
+&lt;span class=&#34;nv&#34;&gt;ONBOOT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yes
 &lt;span class=&#34;nv&#34;&gt;加上DNS2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;8.8.8.8
 然后按下ESC  输入&lt;span class=&#34;s2&#34;&gt;&amp;#34;:wq&amp;#34;&lt;/span&gt;  回车
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
