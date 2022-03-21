@@ -6,7 +6,28 @@
     <description>Recent content in Posts on AllForOne&#39;s Site,Your genneration comes!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Feb 2022 15:24:22 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Mar 2022 15:48:16 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Internet</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/internet/</link>
+      <pubDate>Sun, 20 Mar 2022 15:48:16 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/internet/</guid>
+      <description>[TOC]
+计算机网络 1.前言   计算机网络是 互连的（互联互通） **自治（无主从关系）**的计算机集合
+  五大功能：
+  数据通信：连通性
+  资源共享：对硬件 软件 数据的共享
+  分布式处理：多台计算机共同承担同一工作任务的不同部分
+  提高可靠性：替代机的存在
+  负载均衡：将任务均衡分配给各台计算机
+  计网的组成：硬件，软件，协议
+  工作方式：
+ 边缘部分：用户直接使用：C/S方式 P2P方式 核心部分：为边缘部分服务    功能组成：
+ 通信子网：实现 数据通信 资源子网：实现 资源共享/数据处理    计算机网络的分类：
+ 按分布范围分：广域网WAN 城域网MAN 局域网WAN 个人区域网PAN 按使用者分：公用网，专用网 按交换技术分：电路交换，报文交换，分组交换 按拓扑结构分： 按传输技术分：广播式网络（共享公共信道） 点对点：使用 分组存储转发和路由选择机制  分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 默认路由器，又称为 第一跳路由器或 缺省路由器 ,源路由器 目的主机所链接的路由器叫做 目的路由器 ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发      2.</description>
+    </item>
+    
     <item>
       <title>Hive</title>
       <link>https://yuxin-zh.github.io/AllForOne/p/hive/</link>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='[TOC]
+计算机网络 1.前言   计算机网络是 互连的（互联互通） **自治（无主从关系）**的计算机集合
+  五大功能：
+  数据通信：连通性
+  资源共享：对硬件 软件 数据的共享
+  分布式处理：多台计算机共同承担同一工作任务的不同部分
+  提高可靠性：替代机的存在
+  负载均衡：将任务均衡分配给各台计算机
+  计网的组成：硬件，软件，协议
+  工作方式：
+ 边缘部分：用户直接使用：C/S方式 P2P方式 核心部分：为边缘部分服务    功能组成：
+ 通信子网：实现 数据通信 资源子网：实现 资源共享/数据处理    计算机网络的分类：
+ 按分布范围分：广域网WAN 城域网MAN 局域网WAN 个人区域网PAN 按使用者分：公用网，专用网 按交换技术分：电路交换，报文交换，分组交换 按拓扑结构分： 按传输技术分：广播式网络（共享公共信道） 点对点：使用 分组存储转发和路由选择机制  分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 默认路由器，又称为 第一跳路由器或 缺省路由器 ,源路由器 目的主机所链接的路由器叫做 目的路由器 ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发      2.'><title>Internet</title>
+
+<link rel='canonical' href='https://yuxin-zh.github.io/AllForOne/p/internet/'>
+
+<link rel="stylesheet" href="/AllForOne/scss/style.min.df3f8ce6bc6b6b400b5f6141ab1b71f0180e52f4bc579ce3d854bd3aa58868a4.css"><meta property='og:title' content='Internet'>
+<meta property='og:description' content='[TOC]
+计算机网络 1.前言   计算机网络是 互连的（互联互通） **自治（无主从关系）**的计算机集合
+  五大功能：
+  数据通信：连通性
+  资源共享：对硬件 软件 数据的共享
+  分布式处理：多台计算机共同承担同一工作任务的不同部分
+  提高可靠性：替代机的存在
+  负载均衡：将任务均衡分配给各台计算机
+  计网的组成：硬件，软件，协议
+  工作方式：
+ 边缘部分：用户直接使用：C/S方式 P2P方式 核心部分：为边缘部分服务    功能组成：
+ 通信子网：实现 数据通信 资源子网：实现 资源共享/数据处理    计算机网络的分类：
+ 按分布范围分：广域网WAN 城域网MAN 局域网WAN 个人区域网PAN 按使用者分：公用网，专用网 按交换技术分：电路交换，报文交换，分组交换 按拓扑结构分： 按传输技术分：广播式网络（共享公共信道） 点对点：使用 分组存储转发和路由选择机制  分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 默认路由器，又称为 第一跳路由器或 缺省路由器 ,源路由器 目的主机所链接的路由器叫做 目的路由器 ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发      2.'>
+<meta property='og:url' content='https://yuxin-zh.github.io/AllForOne/p/internet/'>
+<meta property='og:site_name' content='AllForOne&#39;s Site,Your genneration comes!'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-03-20T15:48:16&#43;08:00'/><meta property='article:modified_time' content='2022-03-20T15:48:16&#43;08:00'/>
+<meta name="twitter:title" content="Internet">
+<meta name="twitter:description" content="[TOC]
+计算机网络 1.前言   计算机网络是 互连的（互联互通） **自治（无主从关系）**的计算机集合
+  五大功能：
+  数据通信：连通性
+  资源共享：对硬件 软件 数据的共享
+  分布式处理：多台计算机共同承担同一工作任务的不同部分
+  提高可靠性：替代机的存在
+  负载均衡：将任务均衡分配给各台计算机
+  计网的组成：硬件，软件，协议
+  工作方式：
+ 边缘部分：用户直接使用：C/S方式 P2P方式 核心部分：为边缘部分服务    功能组成：
+ 通信子网：实现 数据通信 资源子网：实现 资源共享/数据处理    计算机网络的分类：
+ 按分布范围分：广域网WAN 城域网MAN 局域网WAN 个人区域网PAN 按使用者分：公用网，专用网 按交换技术分：电路交换，报文交换，分组交换 按拓扑结构分： 按传输技术分：广播式网络（共享公共信道） 点对点：使用 分组存储转发和路由选择机制  分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 默认路由器，又称为 第一跳路由器或 缺省路由器 ,源路由器 目的主机所链接的路由器叫做 目的路由器 ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发      2.">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/AllForOne" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/AllForOne/p/internet/">Internet</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 20, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[TOC]</p>
+<h1 id="计算机网络">计算机网络</h1>
+<h2 id="1前言">1.前言</h2>
+<ul>
+<li>
+<p>计算机网络是 <strong>互连的（互联互通）</strong> **自治（无主从关系）**的计算机集合</p>
+</li>
+<li>
+<p>五大功能：</p>
+</li>
+<li>
+<p><strong>数据通信</strong>：连通性</p>
+</li>
+<li>
+<p><strong>资源共享</strong>：对硬件 软件 数据的共享</p>
+</li>
+<li>
+<p><strong>分布式处理</strong>：多台计算机共同承担同一工作任务的不同部分</p>
+</li>
+<li>
+<p><strong>提高可靠性</strong>：替代机的存在</p>
+</li>
+<li>
+<p><strong>负载均衡</strong>：将任务均衡分配给各台计算机</p>
+</li>
+<li>
+<p>计网的组成：硬件，软件，<strong>协议</strong></p>
+</li>
+<li>
+<p>工作方式：</p>
+<ul>
+<li>边缘部分：用户直接使用：C/S方式 P2P方式</li>
+<li>核心部分：为边缘部分服务</li>
+</ul>
+</li>
+<li>
+<p>功能组成：</p>
+<ul>
+<li>通信子网：实现 <strong>数据通信</strong></li>
+<li>资源子网：实现 <strong>资源共享/数据处理</strong></li>
+</ul>
+<p><img src="/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220320160038673.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220320160038673"
+	
+	
+></p>
+</li>
+<li>
+<p>计算机网络的分类：</p>
+<ul>
+<li>按分布范围分：<strong>广域网WAN</strong> <strong>城域网MAN</strong> <strong>局域网WAN</strong> <strong>个人区域网PAN</strong></li>
+<li>按使用者分：公用网，专用网</li>
+<li>按交换技术分：电路交换，报文交换，分组交换</li>
+<li>按拓扑结构分：<img src="/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220320161116413.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220320161116413"
+	
+	
+></li>
+<li>按传输技术分：广播式网络（共享公共信道） 点对点：使用 <strong>分组存储转发和路由选择机制</strong>
+<ul>
+<li>分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 <strong>默认路由器</strong>，又称为 <strong>第一跳路由器</strong>或 <strong>缺省路由器</strong> ,源路由器  目的主机所链接的路由器叫做 <strong>目的路由器</strong> ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2标准化工作">2.标准化工作</h2>
+<ul>
+<li>标准的分类：
+<ul>
+<li>法定标准：由权威机构指定的正式的，合法的标准  例如OSI</li>
+<li>事实标准：某些公司的产品在竞争中占据了主流；例如TCP/IP</li>
+</ul>
+</li>
+<li>RFC：因特网标准的一种形式  并不代表所有RFC都是因特网标准 因特网标准一定是RFC形式；RFC上升为因特网标准需要四个阶段：
+<ul>
+<li>1）<strong>因特网草案</strong>（此时并不是RFC文档）</li>
+<li>2）<strong>建议标准</strong>   成为了RFC文档</li>
+<li>3）<strong>草案标准</strong>  2011年以后取消</li>
+<li>4）因特网标准</li>
+</ul>
+</li>
+<li>标准化工作的相关组织
+<ul>
+<li>ISO ITU IEEE</li>
+</ul>
+</li>
+</ul>
+<h2 id="3互联网相关的指标">3.互联网相关的指标</h2>
+<ul>
+<li><strong>速率</strong>：即数据率或输出传输率，比特率
+<ul>
+<li>比特 1/0位</li>
+<li>连接在计算机网络上的主机在数字信道上传送数据 <strong>位数的速率</strong></li>
+<li>单位是k/s kb/s Gb/s Tb/s</li>
+<li>需要注意的使形容速度的不同单位的换算关系与存储是不同的</li>
+</ul>
+</li>
+<li><strong>带宽</strong>：用来表示网络的通信线路传送数据的能力，通常是指单位时间内从网络中的某一点到另一点所能通过的&quot;最高数据率&quot;  电磁波的传播速率2*10^8m/s</li>
+<li><strong>吞吐量</strong>：表示在单位时间内通过某个网络（接口 信道）的数据量。单位为b/s lb/s Mb/s</li>
+<li><strong>时延</strong>：指数据报从网络的一段传送到另一端所需的事件。也叫 <strong>延迟 或 迟延</strong>。单位是ms
+<ul>
+<li>发送时延📫==数据长度/信道带宽</li>
+<li>传播时延📰==取决于电磁波传播速度和链路长度</li>
+<li>排队时延🚉==等待输出/输入 链路可用所需的时间</li>
+<li>处理时延🥓==检错 找出口的时间</li>
+</ul>
+</li>
+<li><strong>往返时延RTT</strong>：从发送方发送数据开始，到发送方接收到接收方的确认，总共经历的时延</li>
+<li>利用率：
+<ul>
+<li>信道利用率: 主要看链路多长时间上有数据传输</li>
+<li>网络利用率: 信道利用率加权平均值</li>
+</ul>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 AllForOne&#39;s Site,Your genneration comes!
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1前言">1.前言</a></li>
+    <li><a href="#2标准化工作">2.标准化工作</a></li>
+    <li><a href="#3互联网相关的指标">3.互联网相关的指标</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/AllForOne/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -6,7 +6,141 @@
         <description>Recent content on AllForOne&#39;s Site,Your genneration comes!</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 23 Feb 2022 15:24:22 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 20 Mar 2022 15:48:16 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Internet</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/internet/</link>
+        <pubDate>Sun, 20 Mar 2022 15:48:16 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/internet/</guid>
+        <description>&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&#34;计算机网络&#34;&gt;计算机网络&lt;/h1&gt;
+&lt;h2 id=&#34;1前言&#34;&gt;1.前言&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;计算机网络是 &lt;strong&gt;互连的（互联互通）&lt;/strong&gt; **自治（无主从关系）**的计算机集合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;五大功能：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;数据通信&lt;/strong&gt;：连通性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;资源共享&lt;/strong&gt;：对硬件 软件 数据的共享&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分布式处理&lt;/strong&gt;：多台计算机共同承担同一工作任务的不同部分&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提高可靠性&lt;/strong&gt;：替代机的存在&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;负载均衡&lt;/strong&gt;：将任务均衡分配给各台计算机&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计网的组成：硬件，软件，&lt;strong&gt;协议&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工作方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;边缘部分：用户直接使用：C/S方式 P2P方式&lt;/li&gt;
+&lt;li&gt;核心部分：为边缘部分服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;功能组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通信子网：实现 &lt;strong&gt;数据通信&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;资源子网：实现 &lt;strong&gt;资源共享/数据处理&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220320160038673.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220320160038673&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算机网络的分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按分布范围分：&lt;strong&gt;广域网WAN&lt;/strong&gt; &lt;strong&gt;城域网MAN&lt;/strong&gt; &lt;strong&gt;局域网WAN&lt;/strong&gt; &lt;strong&gt;个人区域网PAN&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;按使用者分：公用网，专用网&lt;/li&gt;
+&lt;li&gt;按交换技术分：电路交换，报文交换，分组交换&lt;/li&gt;
+&lt;li&gt;按拓扑结构分：&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220320161116413.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220320161116413&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;按传输技术分：广播式网络（共享公共信道） 点对点：使用 &lt;strong&gt;分组存储转发和路由选择机制&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;分组转发：指互联网中路由器转发ip分组的物理过程和数据报转发机制。在网络中，一台主机通常是与一台路由器相链接，这台路由器叫主机的 &lt;strong&gt;默认路由器&lt;/strong&gt;，又称为 &lt;strong&gt;第一跳路由器&lt;/strong&gt;或 &lt;strong&gt;缺省路由器&lt;/strong&gt; ,源路由器  目的主机所链接的路由器叫做 &lt;strong&gt;目的路由器&lt;/strong&gt; ；分组转发通常分为直接和间接，源主机与目的主机的在一个网络就叫做直接转发 否则就为间接转发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2标准化工作&#34;&gt;2.标准化工作&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;标准的分类：
+&lt;ul&gt;
+&lt;li&gt;法定标准：由权威机构指定的正式的，合法的标准  例如OSI&lt;/li&gt;
+&lt;li&gt;事实标准：某些公司的产品在竞争中占据了主流；例如TCP/IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;RFC：因特网标准的一种形式  并不代表所有RFC都是因特网标准 因特网标准一定是RFC形式；RFC上升为因特网标准需要四个阶段：
+&lt;ul&gt;
+&lt;li&gt;1）&lt;strong&gt;因特网草案&lt;/strong&gt;（此时并不是RFC文档）&lt;/li&gt;
+&lt;li&gt;2）&lt;strong&gt;建议标准&lt;/strong&gt;   成为了RFC文档&lt;/li&gt;
+&lt;li&gt;3）&lt;strong&gt;草案标准&lt;/strong&gt;  2011年以后取消&lt;/li&gt;
+&lt;li&gt;4）因特网标准&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;标准化工作的相关组织
+&lt;ul&gt;
+&lt;li&gt;ISO ITU IEEE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3互联网相关的指标&#34;&gt;3.互联网相关的指标&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;速率&lt;/strong&gt;：即数据率或输出传输率，比特率
+&lt;ul&gt;
+&lt;li&gt;比特 1/0位&lt;/li&gt;
+&lt;li&gt;连接在计算机网络上的主机在数字信道上传送数据 &lt;strong&gt;位数的速率&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;单位是k/s kb/s Gb/s Tb/s&lt;/li&gt;
+&lt;li&gt;需要注意的使形容速度的不同单位的换算关系与存储是不同的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;带宽&lt;/strong&gt;：用来表示网络的通信线路传送数据的能力，通常是指单位时间内从网络中的某一点到另一点所能通过的&amp;quot;最高数据率&amp;quot;  电磁波的传播速率2*10^8m/s&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;吞吐量&lt;/strong&gt;：表示在单位时间内通过某个网络（接口 信道）的数据量。单位为b/s lb/s Mb/s&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时延&lt;/strong&gt;：指数据报从网络的一段传送到另一端所需的事件。也叫 &lt;strong&gt;延迟 或 迟延&lt;/strong&gt;。单位是ms
+&lt;ul&gt;
+&lt;li&gt;发送时延📫==数据长度/信道带宽&lt;/li&gt;
+&lt;li&gt;传播时延📰==取决于电磁波传播速度和链路长度&lt;/li&gt;
+&lt;li&gt;排队时延🚉==等待输出/输入 链路可用所需的时间&lt;/li&gt;
+&lt;li&gt;处理时延🥓==检错 找出口的时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;往返时延RTT&lt;/strong&gt;：从发送方发送数据开始，到发送方接收到接收方的确认，总共经历的时延&lt;/li&gt;
+&lt;li&gt;利用率：
+&lt;ul&gt;
+&lt;li&gt;信道利用率: 主要看链路多长时间上有数据传输&lt;/li&gt;
+&lt;li&gt;网络利用率: 信道利用率加权平均值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Hive</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/hive/</link>
         <pubDate>Wed, 23 Feb 2022 15:24:22 +0800</pubDate>
