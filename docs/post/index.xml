@@ -6,7 +6,16 @@
     <description>Recent content in Posts on AllForOne&#39;s Site,Your genneration comes!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Mar 2022 15:48:16 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Apr 2022 17:10:35 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bingda</title>
+      <link>https://yuxin-zh.github.io/AllForOne/p/bingda/</link>
+      <pubDate>Thu, 14 Apr 2022 17:10:35 +0800</pubDate>
+      
+      <guid>https://yuxin-zh.github.io/AllForOne/p/bingda/</guid>
+      <description> 我还没转换成ap模式 所以你就暂时使用路由连接（只用给路由器通电 然后连接网线一端插在路由的Lan随便一个接口 另一端插小车上）🚚 你电脑也要连接这个路由的wifi信号 WLAN名字是：419-1 管理密码是418418418 然后登录tplogin.cn 输入管理密码 进入界面点击设备管理看小车的ip地址 应该是192.168.0.101 然后点击tools压缩包里的nomachine安装 然后 👉管理员的方式运行👈nomachine   点击进去后账号和密码随便取一个 记住就行（一定要是管理员运行 不然会闪退） 然后你进去会看到一个ubuntu18的界面 点开terminal📑 一般的运行流程是这样的（我以打开摄像头为例子奥）  先打开一个terminal 输入roscore 回车✍ 在打开一个terminal 输入roslaunch robot_vision robot_camera.launch🎃 再新开一个terminal输入rqt_image_view 回车 这样就可以查看图像了👀 其他的都差不多的 就是要注意每新发布一个话题 你都需要新开一个terminal并且roscore是需要第一个打开的    </description>
+    </item>
+    
     <item>
       <title>Internet</title>
       <link>https://yuxin-zh.github.io/AllForOne/p/internet/</link>

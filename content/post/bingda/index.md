@@ -1,7 +1,6 @@
 ---
 title: "Bingda"
 date: 2022-04-14T17:10:35+08:00
-draft: false
 image: 3.jpg
 ---
 

@@ -6,7 +6,59 @@
         <description>Recent content on AllForOne&#39;s Site,Your genneration comes!</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 20 Mar 2022 15:48:16 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 14 Apr 2022 17:10:35 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bingda</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/bingda/</link>
+        <pubDate>Thu, 14 Apr 2022 17:10:35 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/bingda/</guid>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/bingda/3.jpg" alt="Featured image of post Bingda" /&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;我还没转换成ap模式 所以你就暂时使用路由连接&lt;/strong&gt;（只用给路由器通电 然后连接网线一端插在路由的Lan随便一个接口 另一端插小车上）🚚&lt;/li&gt;
+&lt;li&gt;你电脑也要连接这个路由的wifi信号  WLAN名字是：419-1  管理密码是418418418&lt;/li&gt;
+&lt;li&gt;然后登录tplogin.cn  输入管理密码 进入界面点击设备管理看小车的ip地址 应该是192.168.0.101&lt;/li&gt;
+&lt;li&gt;然后点击tools压缩包里的nomachine安装  然后 👉&lt;strong&gt;管理员的方式运行&lt;/strong&gt;👈nomachine&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/1.png&#34;
+	width=&#34;1423&#34;
+	height=&#34;258&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/1_hufd5c3110c1c825a2c1dfb162a803b8f7_37342_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/1_hufd5c3110c1c825a2c1dfb162a803b8f7_37342_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220414171526481&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;551&#34;
+		data-flex-basis=&#34;1323px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/2.png&#34;
+	width=&#34;418&#34;
+	height=&#34;74&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/2_hub5735a508524b0fb9bc6ac2483d7e42f_11451_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/bingda/2_hub5735a508524b0fb9bc6ac2483d7e42f_11451_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220414171739145&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;564&#34;
+		data-flex-basis=&#34;1355px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;点击进去后账号和密码随便取一个 记住就行（&lt;strong&gt;一定要是管理员运行  不然会闪退&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;然后你进去会看到一个ubuntu18的界面 点开terminal📑&lt;/li&gt;
+&lt;li&gt;一般的运行流程是这样的（我以打开摄像头为例子奥）
+&lt;ol&gt;
+&lt;li&gt;先打开一个terminal 输入roscore  回车✍&lt;/li&gt;
+&lt;li&gt;在打开一个terminal 输入roslaunch robot_vision robot_camera.launch🎃&lt;/li&gt;
+&lt;li&gt;再新开一个terminal输入rqt_image_view 回车 这样就可以查看图像了👀&lt;/li&gt;
+&lt;li&gt;其他的都差不多的 就是要注意每新发布一个话题 你都需要新开一个terminal并且roscore是需要第一个打开的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Internet</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/internet/</link>
         <pubDate>Sun, 20 Mar 2022 15:48:16 +0800</pubDate>
