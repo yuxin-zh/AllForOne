@@ -43,7 +43,16 @@
       <pubDate>Wed, 23 Feb 2022 15:24:22 +0800</pubDate>
       
       <guid>https://yuxin-zh.github.io/AllForOne/p/hive/</guid>
-      <description></description>
+      <description>[TOC]
+1.Hive Introduction   HIve是一个开源的 数据仓库软件，用于read，write，manage直接存储在HDFS中的大型数据集文件
+  HQL用于数据查询和分析
+  HIve是基于读取的因此不适用于高频率写入操作的事务处理
+  HIve功能
+ 提取/转载/加载 （ETL）数据 存储 查询和分析HDFS或Hbase中存储的大规模数据 查询是通过MapReduce完成的，Notice🎉：并非所有查询都需要Mapreduce  Extension：hive为了执行效率考虑，简单的查询如select，不带count，sum,group by😀这样的都不走mapreduce，直接读取hdfs文件进行filter过滤 当查询语句中的过滤条件只是分区字段的情况下不会进行mapreduce   hive-site-xml 有个配置参数hive.fetch.task.conversion = more将该参数设置为more时，简单查询就不会走mapreduce了，色湖之为minimal，那么任何查询都会走mapreduce🚩    Hive允许用户编写自己的函数,有如下三种类型：
+ 用户定义函数 UDF 用户定义聚合函数 UDAF 用户定义的表生成函数 UDTF    Hive缺点：
+ 不支持处理session 无法修改表数据（无法更新、删除、插入）只能通过文件追加和重新导入数据 无法为列编制索引（支持索引，但无法提高查询速度）    Hive数据存储
+  Hive可以解析数据，所以将数据导入Hive表只需将数据移动到表所在的目录（数据在HDFS）,如果数据在本地文件系统，则需要将数据复制到表所在的目录中。🀄
+  从本地：Example：在本地文件系统船舰一个名为local.txt的文件（数据之间空格间隔），然后执行了load data local inpath&#39;绝对路径/local.txt into table local;就可以 使用hadoop fs -ls</description>
     </item>
     
     <item>
