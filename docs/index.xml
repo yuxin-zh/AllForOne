@@ -290,7 +290,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;2-hive数据模型&#34;&gt;2. HIve数据模型&lt;/h2&gt;
+&lt;h2 id=&#34;2hive数据模型&#34;&gt;2.HIve数据模型&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;h3 id=&#34;tables&#34;&gt;Tables&lt;/h3&gt;
@@ -461,7 +461,7 @@ show databases like &amp;#39;my.*&amp;#39;;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;52-将数据加载到hive&#34;&gt;5.2 将数据加载到Hive&lt;/h3&gt;
+&lt;h3 id=&#34;52将数据加载到hive&#34;&gt;5.2将数据加载到Hive&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;加载的过程中，LOCAL关键词指定文件在主机中的位置。 &lt;strong&gt;如果未指定LOCAL关键字，将从inpath之后指定的URI或fs.default.name Hive属性中的值加载文件，而Overrite决定是追加还是替换现有数据&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;本地：&lt;code&gt;load data local inpath &#39;/////&#39; into table table_name&lt;/code&gt;&lt;/li&gt;
@@ -469,10 +469,67 @@ show databases like &amp;#39;my.*&amp;#39;;
 &lt;/ul&gt;
 &lt;h3 id=&#34;hive分区&#34;&gt;🍥🍥Hive分区🍥🍥&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;分区的重要性
+&lt;li&gt;
+&lt;p&gt;分区的重要性&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;分区是一种根据特定列的值将表划分为相关部分的方法⏲先提一下HIve在查询中的作用：hive将SQL查询转换为Mapreduce作业，然后将其提交到Hadoop集群。提交SQL查询时，HIve读取整个数据集。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分区是一种根据特定列的值将表划分为相关部分的方法⏲先提一下HIve在查询中的作用：hive将SQL查询转换为Mapreduce作业，然后将其提交到Hadoop集群。提交SQL查询时，HIve读取整个数据集。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id=&#34;静态分区-spstatic-partition&#34;&gt;静态分区 SP（static partition）&lt;/h3&gt;
+&lt;p&gt;  1、静态分区是在编译期间指定的指定分区名🈯
+  2、支持load和insert两种插入方式
+    2.1load方式&lt;code&gt;load data local inpath&#39;&#39; into table partition..&lt;/code&gt;
+      1）会将分区字段的值全部修改为指定的内容
+      2）一般是确定该分区内容是一致的时候才会使用2w3qaw
+    2.2insert方式
+      1）必须先将数据放在一个没有设置分区的普通表中
+      2）该方式可以在一个分区内存储一个范围的内容
+      3）从普通表中选出的字段不能包含分区字段
+  3、适用于分区数少，分区名可以明确的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id=&#34;动态分区-dpdynamic-partition&#34;&gt;动态分区 DP（dynamic partition）&lt;/h3&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;  1、根据分区字段的实际值，动态进行分区💽
+  2、是在sql执行的时候进行分区
+  3、需要先将动态分区设置打开（set hive.exec.dynamic.partition.mode=nonstrict ）
+  4、只能用insert方式&lt;code&gt;insert into table partition(分区名) select () from table ..&lt;/code&gt;
+  5、通过普通表选出的字段包含分区字段，分区字段放置在最后，多个分区字段按照分区顺序放置&lt;/p&gt;
+&lt;p&gt;​		6、增加分区&lt;code&gt;alter ... add partition() localtion....&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​		7、删除分区后，将同时删除元数据和数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;54hive分桶&#34;&gt;5.4Hive分桶&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Hive中的分桶是把数据分解为多个范围的概念，用于为数据提供额外的结构，以便用于更高效的查询。bucket的范围由一个或多个列的哈希值决定，这些列被称为“bucketing”列或者“clustering by”列。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通常的我们会在 &lt;strong&gt;😀分区数量有限或者分区的大小相对相等的情况下选择分区&lt;/strong&gt;，但是对于一些数据分布并不均等的情况，这种分区时不不理想的，因此引入了bucket的概念。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果要使用分桶需要设置以下属性📜&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;set hive.enforce.bucketing = true;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;set hive.exec.dynamic.partition.mode=nonstrict;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建分桶&lt;code&gt;create table t_name() partitioned by() clustered by() into 几个 buckets.....&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;加载数据&lt;code&gt;insert into table t_name partition() select ...from table_...&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;55hive模式设计&#34;&gt;5.5Hive模式设计&lt;/h3&gt;
+&lt;h4 id=&#34;551日期表&#34;&gt;5.5.1日期表&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;按照日期分区来创建表：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;`create table data_table(id int,part string ) partitioned by(int date);`
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 </description>

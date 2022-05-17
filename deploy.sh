@@ -1,1 +1,1 @@
-git add .&&git commit -m "hive"&&git push
+hugo&&git add .&&git commit -m "hive"&&git push
