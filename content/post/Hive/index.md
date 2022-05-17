@@ -71,7 +71,7 @@ image: "b2.webp"
   - HIve Driver: 接收来自不同来源的查询，它 **将查询传输到编译器**
   - HIve Compiler：目的是 **解析查询🔍并对不同的查询快和表达式执行语义分析**，-->将HQL转化为MapReduce Job
 
-## 2. HIve数据模型
+## 2.HIve数据模型
 
 - ### Tables
 
@@ -166,7 +166,7 @@ image: "b2.webp"
 - 外部表的特点：
   - 只有存储在metastore的元数据由hive控制
 
-### 5.2 将数据加载到Hive
+### 5.2将数据加载到Hive
 
 - 加载的过程中，LOCAL关键词指定文件在主机中的位置。 **如果未指定LOCAL关键字，将从inpath之后指定的URI或fs.default.name Hive属性中的值加载文件，而Overrite决定是追加还是替换现有数据**
 - 本地：`load data local inpath '/////' into table table_name`
@@ -176,3 +176,48 @@ image: "b2.webp"
 
 - 分区的重要性
   - 分区是一种根据特定列的值将表划分为相关部分的方法⏲先提一下HIve在查询中的作用：hive将SQL查询转换为Mapreduce作业，然后将其提交到Hadoop集群。提交SQL查询时，HIve读取整个数据集。
+  
+  - ### 静态分区 SP（static partition）
+  
+      1、静态分区是在编译期间指定的指定分区名🈯
+          2、支持load和insert两种插入方式
+            2.1load方式`load data local inpath'' into table partition..`
+              1）会将分区字段的值全部修改为指定的内容
+              2）一般是确定该分区内容是一致的时候才会使用2w3qaw
+            2.2insert方式
+              1）必须先将数据放在一个没有设置分区的普通表中
+              2）该方式可以在一个分区内存储一个范围的内容
+              3）从普通表中选出的字段不能包含分区字段
+          3、适用于分区数少，分区名可以明确的数据
+  
+  - ### 动态分区 DP（dynamic partition）
+  
+    1、根据分区字段的实际值，动态进行分区💽
+     2、是在sql执行的时候进行分区
+     3、需要先将动态分区设置打开（set hive.exec.dynamic.partition.mode=nonstrict ）
+     4、只能用insert方式`insert into table partition(分区名) select () from table ..`
+     5、通过普通表选出的字段包含分区字段，分区字段放置在最后，多个分区字段按照分区顺序放置
+  
+  ​		6、增加分区`alter ... add partition() localtion....`
+  
+  ​		7、删除分区后，将同时删除元数据和数据
+
+### 5.4Hive分桶
+
+- Hive中的分桶是把数据分解为多个范围的概念，用于为数据提供额外的结构，以便用于更高效的查询。bucket的范围由一个或多个列的哈希值决定，这些列被称为“bucketing”列或者“clustering by”列。
+- 通常的我们会在 **😀分区数量有限或者分区的大小相对相等的情况下选择分区**，但是对于一些数据分布并不均等的情况，这种分区时不不理想的，因此引入了bucket的概念。
+- 如果要使用分桶需要设置以下属性📜
+  - `set hive.enforce.bucketing = true;`
+  - `set hive.exec.dynamic.partition.mode=nonstrict;`
+
+- 创建分桶`create table t_name() partitioned by() clustered by() into 几个 buckets.....`
+- 加载数据`insert into table t_name partition() select ...from table_...`
+
+### 5.5Hive模式设计
+
+#### 5.5.1日期表
+
+- 按照日期分区来创建表：
+
+ 	  `create table data_table(id int,part string ) partitioned by(int date);`
+
