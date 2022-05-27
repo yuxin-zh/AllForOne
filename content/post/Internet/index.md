@@ -73,3 +73,28 @@ draft: False
 - 利用率：
   - 信道利用率: 主要看链路多长时间上有数据传输
   - 网络利用率: 信道利用率加权平均值
+
+![image-20220523143516780](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523143516780.png)
+
+![image-20220523153035397](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523153035397.png)
+
+![image-20220523153047881](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523153047881.png)
+
+![image-20220523153342609](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523153342609.png)
+
+![image-20220523153644679](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523153644679.png)
+
+![](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523153803984.png)
+
+
+
+![image-20220523154236760](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523154236760.png)
+
+![image-20220523154626206](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523154626206.png)
+
+![image-20220523155745729](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523155745729.png)
+
+![image-20220523160002226](C:\Users\请输入姓名\AppData\Roaming\Typora\typora-user-images\image-20220523160002226.png)
+
+
+

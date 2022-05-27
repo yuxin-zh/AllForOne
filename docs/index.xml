@@ -6,7 +6,142 @@
         <description>Recent content on AllForOne&#39;s Site,Your genneration comes!</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 14 Apr 2022 17:10:35 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 26 May 2022 16:08:57 +0800</lastBuildDate><atom:link href="https://yuxin-zh.github.io/AllForOne/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SRS</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/srs/</link>
+        <pubDate>Thu, 26 May 2022 16:08:57 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/srs/</guid>
+        <description>&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&#34;1introduction&#34;&gt;1.introduction&lt;/h1&gt;
+&lt;h2 id=&#34;11purpose&#34;&gt;1.1Purpose&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This specification is written to analyze and summarize the basic requirements of the project and describe the basic requirements and functional characteristics of the functional modules.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The name of this project is called &amp;ldquo;Super Store Data Analysis&amp;rdquo;, and users can get the following information through this website&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Top 10 products with sales volume greater than 1000&lt;/li&gt;
+&lt;li&gt;total sales in each order priority where quantity is even number&lt;/li&gt;
+&lt;li&gt;10 countries whichi have lowest minimutes sales&lt;/li&gt;
+&lt;li&gt;top 10 customers based on the no of letters in their time&lt;/li&gt;
+&lt;li&gt;total quantity in each market where pofit is greater than 100&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2project-overview&#34;&gt;2.Project Overview&lt;/h1&gt;
+&lt;h2 id=&#34;21product-description&#34;&gt;2.1product description&lt;/h2&gt;
+&lt;p&gt;Build a web3d website through Three.js, and realize information interaction and user registration, login and other functions through jsp and mysql, and display the data through flourish.&lt;/p&gt;
+&lt;h2 id=&#34;22product-features&#34;&gt;2.2Product Features&lt;/h2&gt;
+&lt;p&gt;This project can implement a simple online registration, login function, and use hive to process data. Such as the flow chart:&lt;/p&gt;
+&lt;h1 id=&#34;3specific-requirement&#34;&gt;3.specific requirement&lt;/h1&gt;
+&lt;h2 id=&#34;31use-case-description&#34;&gt;3.1use case description&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Example name&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;View Super store related data&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Performer&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;User Administrator&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Use Case Brief&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Specifies how to use the system to query&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;precondition&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;User identity needs to be properly authenticated&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;postcondition&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Return the corresponding data as required&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Basic process&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1. If you enter the system for the first time, return to the registration page 2. If the registration is successful, return to the login page 3. Click the &amp;ldquo;query&amp;rdquo; button 4. Enter the data display page&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>Project_Show</title>
+        <link>https://yuxin-zh.github.io/AllForOne/p/project_show/</link>
+        <pubDate>Thu, 19 May 2022 17:30:32 +0800</pubDate>
+        
+        <guid>https://yuxin-zh.github.io/AllForOne/p/project_show/</guid>
+        <description>&lt;p&gt;[Toc]&lt;/p&gt;
+&lt;h1 id=&#34;project-presentation&#34;&gt;Project Presentation&lt;/h1&gt;
+&lt;h2 id=&#34;1小组成员介绍&#34;&gt;1.小组成员介绍&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;组长：张钰昕&lt;/li&gt;
+&lt;li&gt;组员：刘博予 吴平 张琳 周宇璇 刘士铭⛏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2团队分工&#34;&gt;2.团队分工&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;前后端以及使用Hive处理数据：张钰昕 刘博予 吴平 刘士铭&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用Flourish处理并展示数据：周宇璇 张琳&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3项目效果展示&#34;&gt;3.项目效果展示&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220519174336142.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220519174336142&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220519174355305.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220519174355305&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注册和登录页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220519174739871.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220519174739871&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;​		&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220519174810424.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220519174810424&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据处理后的效果展示暂时未完成&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Bingda</title>
         <link>https://yuxin-zh.github.io/AllForOne/p/bingda/</link>
         <pubDate>Thu, 14 Apr 2022 17:10:35 +0800</pubDate>
@@ -190,6 +325,104 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523143516780.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523143516780&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523153035397.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523153035397&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523153047881.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523153047881&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523153342609.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523153342609&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523153644679.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523153644679&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523153803984.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523154236760.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523154236760&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523154626206.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523154626206&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523155745729.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523155745729&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/C:%5cUsers%5c%e8%af%b7%e8%be%93%e5%85%a5%e5%a7%93%e5%90%8d%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20220523160002226.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220523160002226&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -531,7 +764,51 @@ show databases like &amp;#39;my.*&amp;#39;;
 &lt;pre&gt;&lt;code&gt;`create table data_table(id int,part string ) partitioned by(int date);`
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一次加载多个进程&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;Hive可以在加载数据源后执行多个操作&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，而无需每次加载数据&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;like&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;selcet&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;第二次查询就可以不屑&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;这是不是就是哪个&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;qt1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hive三大引擎&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Hive中不同类型的文件
+&lt;ul&gt;
+&lt;li&gt;文本文件：默认文件，但是又很大的磁盘开销和数据解析开销&lt;/li&gt;
+&lt;li&gt;序列文件：hadoop api提供的二进制文件，易于使用，可拆分，可压缩。以二进制格式存储&lt;/li&gt;
+&lt;li&gt;自定义格式：用户可以通过实现iputformat和outputformat自定义输入和输出格式&lt;/li&gt;
+&lt;li&gt;AVRO文件：它是一种文件格式加上一个序列化和反序列化框架&lt;/li&gt;
+&lt;li&gt;列文件格式：不仅存储彼此相连的数据行，还存储彼此相邻的列值。因此数据集在水平和垂直方向都分了区。有三种重要的柱状文件格式 -RC文件 ORC文件 Parquet文件
+&lt;ul&gt;
+&lt;li&gt;RC文件：二进制键值对组成的平面文件，与序列化文件相似&lt;/li&gt;
+&lt;li&gt;ORC文件：rc的更好版本：有更快的读取速度，但写入性能较差，提供显著的块压缩，可以用高压缩比进行压缩。&lt;/li&gt;
+&lt;li&gt;Parquet：是一种Hadoop最著名的文件格式（柱状文件格式），以平面柱状格式存储嵌套数据结构，读取速度提升，但写入性能较差&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;56导出hive数据&#34;&gt;5.6导出Hive数据&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkdir /jiaoben/ouput   
+
+&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; hive.cli.print.header &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; true&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+insert overwrite &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; directory &lt;span class=&#34;s1&#34;&gt;&amp;#39;/jiaoben/ouput&amp;#39;&lt;/span&gt; row format delimited fields terminated by &lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; lines terminated by &lt;span class=&#34;s1&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; * from wd&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;6hql语法&#34;&gt;6.HQL语法&lt;/h2&gt;
 </description>
         </item>
         <item>

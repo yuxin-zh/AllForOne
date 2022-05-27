@@ -483,7 +483,51 @@ show databases like &#39;my.*&#39;;
 <pre><code>`create table data_table(id int,part string ) partitioned by(int date);`
 </code></pre>
 </li>
+<li>
+<p>一次加载多个进程</p>
+</li>
 </ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">Hive可以在加载数据源后执行多个操作</span><span class="err">，而无需每次加载数据</span><span class="w">  </span><span class="k">like</span><span class="w"> </span><span class="n">selcet</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">第二次查询就可以不屑</span><span class="w"> </span><span class="err">这是不是就是哪个</span><span class="n">qt1</span><span class="w"> </span><span class="n">hive三大引擎</span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Hive中不同类型的文件
+<ul>
+<li>文本文件：默认文件，但是又很大的磁盘开销和数据解析开销</li>
+<li>序列文件：hadoop api提供的二进制文件，易于使用，可拆分，可压缩。以二进制格式存储</li>
+<li>自定义格式：用户可以通过实现iputformat和outputformat自定义输入和输出格式</li>
+<li>AVRO文件：它是一种文件格式加上一个序列化和反序列化框架</li>
+<li>列文件格式：不仅存储彼此相连的数据行，还存储彼此相邻的列值。因此数据集在水平和垂直方向都分了区。有三种重要的柱状文件格式 -RC文件 ORC文件 Parquet文件
+<ul>
+<li>RC文件：二进制键值对组成的平面文件，与序列化文件相似</li>
+<li>ORC文件：rc的更好版本：有更快的读取速度，但写入性能较差，提供显著的块压缩，可以用高压缩比进行压缩。</li>
+<li>Parquet：是一种Hadoop最著名的文件格式（柱状文件格式），以平面柱状格式存储嵌套数据结构，读取速度提升，但写入性能较差</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="56导出hive数据">5.6导出Hive数据</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">mkdir /jiaoben/ouput   
+
+<span class="nb">set</span> hive.cli.print.header <span class="o">=</span> true<span class="p">;</span>
+insert overwrite <span class="nb">local</span> directory <span class="s1">&#39;/jiaoben/ouput&#39;</span> row format delimited fields terminated by <span class="s1">&#39; &#39;</span> lines terminated by <span class="s1">&#39;\n&#39;</span> <span class="k">select</span> * from wd<span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="6hql语法">6.HQL语法</h2>
 
 </section>
 
@@ -703,8 +747,10 @@ show databases like &#39;my.*&#39;;
             <li><a href="#551日期表">5.5.1日期表</a></li>
           </ol>
         </li>
+        <li><a href="#56导出hive数据">5.6导出Hive数据</a></li>
       </ol>
     </li>
+    <li><a href="#6hql语法">6.HQL语法</a></li>
   </ol>
 </nav>
                 </div>

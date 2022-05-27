@@ -221,3 +221,30 @@ image: "b2.webp"
 
  	  `create table data_table(id int,part string ) partitioned by(int date);`
 
+- 一次加载多个进程
+
+```sql
+Hive可以在加载数据源后执行多个操作，而无需每次加载数据  like selcet * from table 第二次查询就可以不屑 这是不是就是哪个qt1 hive三大引擎。
+```
+
+- Hive中不同类型的文件
+  - 文本文件：默认文件，但是又很大的磁盘开销和数据解析开销
+  - 序列文件：hadoop api提供的二进制文件，易于使用，可拆分，可压缩。以二进制格式存储
+  - 自定义格式：用户可以通过实现iputformat和outputformat自定义输入和输出格式
+  - AVRO文件：它是一种文件格式加上一个序列化和反序列化框架
+  - 列文件格式：不仅存储彼此相连的数据行，还存储彼此相邻的列值。因此数据集在水平和垂直方向都分了区。有三种重要的柱状文件格式 -RC文件 ORC文件 Parquet文件
+    - RC文件：二进制键值对组成的平面文件，与序列化文件相似
+    - ORC文件：rc的更好版本：有更快的读取速度，但写入性能较差，提供显著的块压缩，可以用高压缩比进行压缩。
+    - Parquet：是一种Hadoop最著名的文件格式（柱状文件格式），以平面柱状格式存储嵌套数据结构，读取速度提升，但写入性能较差
+
+### 5.6导出Hive数据
+
+```shell
+mkdir /jiaoben/ouput   
+
+set hive.cli.print.header = true;
+insert overwrite local directory '/jiaoben/ouput' row format delimited fields terminated by ' ' lines terminated by '\n' select * from wd;
+```
+
+## 6.HQL语法
+
