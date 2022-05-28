@@ -14,7 +14,6 @@
       
       <guid>https://yuxin-zh.github.io/AllForOne/p/srs/</guid>
       <description>[TOC]
-[TOC]
 1.introduction 1.1Purpose   This specification is written to analyze and summarize the basic requirements of the project and describe the basic requirements and functional characteristics of the functional modules.
   The name of this project is called &amp;ldquo;Super Store Data Analysis&amp;rdquo;, and users can get the following information through this website
  Top 10 products with sales volume greater than 1000 total sales in each order priority where quantity is even number 10 countries whichi have lowest minimutes sales top 10 customers based on the no of letters in their time total quantity in each market where pofit is greater than 100    2.</description>
