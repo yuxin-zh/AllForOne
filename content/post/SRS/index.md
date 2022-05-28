@@ -30,6 +30,8 @@ Build a web3d website through Three.js, and realize information interaction and 
 
 This project can implement a simple online registration, login function, and use hive to process data. Such as the flow chart:
 
+![image-20220528211246748](1.png)
+
 
 
 # 3.specific requirement

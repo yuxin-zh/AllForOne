@@ -36,6 +36,20 @@
 &lt;p&gt;Build a web3d website through Three.js, and realize information interaction and user registration, login and other functions through jsp and mysql, and display the data through flourish.&lt;/p&gt;
 &lt;h2 id=&#34;22product-features&#34;&gt;2.2Product Features&lt;/h2&gt;
 &lt;p&gt;This project can implement a simple online registration, login function, and use hive to process data. Such as the flow chart:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/srs/1.png&#34;
+	width=&#34;1165&#34;
+	height=&#34;808&#34;
+	srcset=&#34;https://yuxin-zh.github.io/AllForOne/AllForOne/p/srs/1_hu07d461e7625d6091db5ec191ad67f72a_32609_480x0_resize_box_3.png 480w, https://yuxin-zh.github.io/AllForOne/AllForOne/p/srs/1_hu07d461e7625d6091db5ec191ad67f72a_32609_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220528211246748&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;346px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h1 id=&#34;3specific-requirement&#34;&gt;3.specific requirement&lt;/h1&gt;
 &lt;h2 id=&#34;31use-case-description&#34;&gt;3.1use case description&lt;/h2&gt;
 &lt;table&gt;
