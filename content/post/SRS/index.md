@@ -20,6 +20,13 @@ date: 2022-05-26T16:08:57+08:00
   - top 10 customers based on the no of letters in their time
   - total quantity in each market where pofit is greater than 100
 
+## 1.2 How to run the project
+
+- you need to install node8.0+  and you'd better use vs code open our Three.js project && run java part in idea which is deployed on tomcat.
+- After all the preparations have been made,you need to run tomcat firstly , and then open Three.js project in vs code ,then open a terminal in it, input "npm run dev"，and wait a minute ,it takes time to deploy website,then you can see what our video shows.
+
+
+
 # 2.Project Overview
 
 ## 2.1product description

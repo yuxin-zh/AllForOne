@@ -16,7 +16,7 @@
       <description>[TOC]
 1.introduction 1.1Purpose   This specification is written to analyze and summarize the basic requirements of the project and describe the basic requirements and functional characteristics of the functional modules.
   The name of this project is called &amp;ldquo;Super Store Data Analysis&amp;rdquo;, and users can get the following information through this website
- Top 10 products with sales volume greater than 1000 total sales in each order priority where quantity is even number 10 countries whichi have lowest minimutes sales top 10 customers based on the no of letters in their time total quantity in each market where pofit is greater than 100    2.</description>
+ Top 10 products with sales volume greater than 1000 total sales in each order priority where quantity is even number 10 countries whichi have lowest minimutes sales top 10 customers based on the no of letters in their time total quantity in each market where pofit is greater than 100    1.</description>
     </item>
     
     <item>
@@ -85,7 +85,11 @@ Project Presentation 1.小组成员介绍  组长：张钰昕 组员：刘博予
       <pubDate>Wed, 23 Feb 2022 15:22:46 +0800</pubDate>
       
       <guid>https://yuxin-zh.github.io/AllForOne/p/zookeeper/</guid>
-      <description></description>
+      <description>[TOC]
+Zookeeper 1.Introduction😀 1.1 分布式系统   分布式系统定义为一种 软件系统，它由独立的计算实体组成，这些独立的计算实体通过就按及网络连接在一起，计算机网络的组件相互通信的协调以实现共同的目标
+  主要特征🤕：
+ 资源共享：在任何地方都可以使用系统中的资源，例如存储空间，计算能力，数据和服务等 可拓展性：从硬件和软件的角度逐步拓展和改进系统的可能行 并发性：多个用户可以同时使用以完成同一任务或不同任务的系统功能 性能和可拓展性：确保系统的响应时间不会随着总负载的增加和降低 容错：即使某些组件发生故障，仍可以确保系统始终可用 通过API进行抽象：确保对最终用户隐藏系统的各个组件，仅向他们展示最终服务💊    **分布式计算的谬论：**设计分布式系统很难，而将一组单独的计算实体编写为程序一起运行时甚至回更难，设计人员和开发员经常做一些假设。
+   假设条件 实际情况     网络可靠 实际上，网络或组件之间的通讯可能失败   延迟为0 分布式系统的用户可以从全球的任何一个地方连接到该系统，但是数据传输需要时间。   带宽无限大 Nope   网络安全 系统在设计的时候并没有认真考虑应用程序的安全性，因此会面临拒绝服务攻击   拓扑不变 随着时间的流逝，有些组件将会被删除   唯一管理员 分布式系统并不会独立运行   运输零成本    网络是同质的 网络由大量不同的实体组成      分布式系统中实现协调时遇到的挑战：   </description>
     </item>
     
     <item>

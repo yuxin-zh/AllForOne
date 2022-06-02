@@ -30,6 +30,11 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;12-how-to-run-the-project&#34;&gt;1.2 How to run the project&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;you need to install node8.0+  and you&amp;rsquo;d better use vs code open our Three.js project &amp;amp;&amp;amp; run java part in idea which is deployed on tomcat.&lt;/li&gt;
+&lt;li&gt;After all the preparations have been made,you need to run tomcat firstly , and then open Three.js project in vs code ,then open a terminal in it, input &amp;ldquo;npm run dev&amp;rdquo;，and wait a minute ,it takes time to deploy website,then you can see what our video shows.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;2project-overview&#34;&gt;2.Project Overview&lt;/h1&gt;
 &lt;h2 id=&#34;21product-description&#34;&gt;2.1product description&lt;/h2&gt;
 &lt;p&gt;Build a web3d website through Three.js, and realize information interaction and user registration, login and other functions through jsp and mysql, and display the data through flourish.&lt;/p&gt;
@@ -830,7 +835,75 @@ insert overwrite &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; directory &lt
         <pubDate>Wed, 23 Feb 2022 15:22:46 +0800</pubDate>
         
         <guid>https://yuxin-zh.github.io/AllForOne/p/zookeeper/</guid>
-        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/zookeeper/b1.webp" alt="Featured image of post Zookeeper" /&gt;</description>
+        <description>&lt;img src="https://yuxin-zh.github.io/AllForOne/p/zookeeper/b1.webp" alt="Featured image of post Zookeeper" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&#34;zookeeper&#34;&gt;Zookeeper&lt;/h1&gt;
+&lt;h2 id=&#34;1introduction&#34;&gt;1.Introduction😀&lt;/h2&gt;
+&lt;h3 id=&#34;11-分布式系统&#34;&gt;1.1 分布式系统&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分布式系统定义为一种 &lt;strong&gt;软件系统&lt;/strong&gt;，它由独立的计算实体组成，这些独立的计算实体通过就按及网络连接在一起，计算机网络的组件相互通信的协调以实现共同的目标&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主要特征🤕&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;资源共享：在任何地方都可以使用系统中的资源，例如存储空间，计算能力，数据和服务等&lt;/li&gt;
+&lt;li&gt;可拓展性：从硬件和软件的角度逐步拓展和改进系统的可能行&lt;/li&gt;
+&lt;li&gt;并发性：多个用户可以同时使用以完成同一任务或不同任务的系统功能&lt;/li&gt;
+&lt;li&gt;性能和可拓展性：确保系统的响应时间不会随着总负载的增加和降低&lt;/li&gt;
+&lt;li&gt;容错：即使某些组件发生故障，仍可以确保系统始终可用&lt;/li&gt;
+&lt;li&gt;通过API进行抽象：确保对最终用户隐藏系统的各个组件，仅向他们展示最终服务💊&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;**分布式计算的谬论：**设计分布式系统很难，而将一组单独的计算实体编写为程序一起运行时甚至回更难，设计人员和开发员经常做一些假设。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;假设条件&lt;/th&gt;
+&lt;th&gt;实际情况&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;网络可靠&lt;/td&gt;
+&lt;td&gt;实际上，网络或组件之间的通讯可能失败&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;延迟为0&lt;/td&gt;
+&lt;td&gt;分布式系统的用户可以从全球的任何一个地方连接到该系统，但是数据传输需要时间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;带宽无限大&lt;/td&gt;
+&lt;td&gt;Nope&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;网络安全&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;系统在设计的时候并没有认真考虑应用程序的安全性，因此会面临拒绝服务攻击&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;拓扑不变&lt;/td&gt;
+&lt;td&gt;随着时间的流逝，有些组件将会被删除&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;唯一管理员&lt;/td&gt;
+&lt;td&gt;分布式系统并不会独立运行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;运输零成本&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;网络是同质的&lt;/td&gt;
+&lt;td&gt;网络由大量不同的实体组成&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h2 id=&#34;分布式系统中实现协调时遇到的挑战&#34;&gt;分布式系统中实现协调时遇到的挑战：&lt;/h2&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>Spring</title>
