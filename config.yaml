@@ -3,7 +3,7 @@ publishDir: docs
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
-title: AllForOne's Site,Your genneration comes!
+title: AllForOne's Site,Young genneration comes!
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
